@@ -18,11 +18,18 @@ public class Ronda {
     //private Participante ganador;
     private Mazo mazo;
     private Pozo pozo;
-
+    
     public Ronda() {
         this.mazo = new Mazo();
+        this.pozo = new Pozo();
     }
 
+    public Ronda(ArrayList<Participante> pptes, Pozo pozo) {
+        this.mazo = new Mazo();
+        this.pozo = pozo;
+        this.participantes = pptes;
+    }
+    
     public void agregar(Participante p){
         participantes.add(p);
     }
@@ -32,9 +39,9 @@ public class Ronda {
         for(Participante p : participantes){
             int i = 0;
             while(i<5){
-                Carta c = mazo.getCartas().get(0);
-                p.getMano().getCartas().add(c);  //metodo en mano agregar carta 
-                mazo.getCartas().remove(0);
+                Carta c = mazo.tomarUna(); //metodo en mazo tomar una
+                p.getMano().agregar(c);  //metodo en mano agregar carta 
+                mazo.eliminar(c); //metodo en mazo eliminar carta
                 i++;
             }
         }
@@ -51,6 +58,11 @@ public class Ronda {
         participantes.remove(p);
         pasadores.add(p);
     }
+    //ESTA ES PARA CUANDO LA PERSONA SE VA CERRANDO EL JUEGO
+    public void retirarse(Participante p){
+        participantes.remove(p);
+        pasadores.remove(p);
+    }
     
     //PENSAR COMO UNO LARGA EVENTO Y EL OTRO NO (LUZ VS APUESTA)
     //metodo apostar con el evento del observer 
@@ -60,11 +72,12 @@ public class Ronda {
         pozo.agregar(monto);
     }
     
-    //
-    
+    // NO SE SI LO VAMOS A HACER ASÍ
     public void estadoRonda(){
         if(participantes.isEmpty()){
-            //COMO LLEGO AL JUEGO PARA CREAR UNA NUEVA RONDA CON EL MISMO POZO  
+            //COMO LLEGO AL JUEGO PARA CREAR UNA NUEVA RONDA CON EL MISMO POZO
+            Ronda nueva = new Ronda(participantes, pozo);
+            //Crear la vista para la nueva ronda
         }else{
             //QUIENES DE LOS Q APOSTARON TIENEN LA FIGURA MAS ALTA
         }

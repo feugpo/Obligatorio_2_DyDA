@@ -23,5 +23,9 @@ public class Mano {
         return cartas;
     }
     
+    public void agregar(Carta c){
+        cartas.add(c);
+    }
+    
     
 }

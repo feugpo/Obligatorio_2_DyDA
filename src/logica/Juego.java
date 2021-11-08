@@ -35,6 +35,12 @@ public class Juego {
         rondaActual = ronda;
     }
     
+    public void retirarse(Participante p){
+        participantes.remove(p);
+        retirados.add(p);
+    }
+    
+    
     
     
 }

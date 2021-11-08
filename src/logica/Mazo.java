@@ -33,6 +33,14 @@ public class Mazo {
         Collections.shuffle(cartas);
     }
     
+    public void eliminar(Carta c){
+        cartas.remove(c);
+    }
+    
+    public Carta tomarUna(){
+        return cartas.get(0);
+    }
+    
     
     
     

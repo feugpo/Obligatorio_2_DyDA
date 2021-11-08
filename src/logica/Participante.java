@@ -14,11 +14,12 @@ public class Participante {
     private int saldoInicial;
     private int totalApostado;
     private int totalGanado;
-    private Mano mano = new Mano();
+    private Mano mano;
 
     public Participante(Jugador jugador) {
         this.jugador = jugador;
         this.saldoInicial = jugador.getSaldo();
+        
     }
 
     public Mano getMano() {
@@ -43,6 +44,10 @@ public class Participante {
     
     public void sumarGanado(int monto){
         totalGanado += monto; 
+    }
+    //LO PRECISO SI TENGO Q REINICIAR LA MANO PARA CADA NUEVA RONDA
+    public void nuevaMano(){       
+        this.mano = new Mano();
     }
     
     
