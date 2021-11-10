@@ -41,6 +41,14 @@ public class Sistema {
         return sJuegos.getConfiguracion();
     }
 
+    public Jugador loginJugador(String n, String c) {
+        return sUsuarios.loginJugador(n, c);
+    }
+
+    public Administrador loginAdmin(String n, String c) {
+        return sUsuarios.loginAdmin(n, c);
+    }
+
     
     
     

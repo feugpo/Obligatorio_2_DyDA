@@ -20,6 +20,14 @@ public abstract class Usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public String getContrasenha() {
+        return contrasenha;
+    }
+
     
 
     
