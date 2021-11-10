@@ -9,7 +9,7 @@ package iu;
  *
  * @author Gabriel
  */
-public class LoginGenerico extends javax.swing.JDialog {
+public abstract class LoginGenerico extends javax.swing.JDialog {
 
     /**
      * Creates new form LoginGenerico
