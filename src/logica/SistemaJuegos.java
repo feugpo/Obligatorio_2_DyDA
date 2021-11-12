@@ -13,11 +13,15 @@ import java.util.ArrayList;
  */
 public class SistemaJuegos {
     private ArrayList<Juego> juegos = new ArrayList();
-    private ArrayList<Jugador> listaEspera = new ArrayList();
+    private Juego juegoEspera = new Juego();
     private Configuracion configuracion = new Configuracion();
 
     public Configuracion getConfiguracion() {
         return configuracion;
+    }
+
+    public void nuevoJuegoEspera() {
+        juegoEspera = new Juego();
     }
     
     
@@ -31,25 +35,23 @@ public class SistemaJuegos {
     
     
     //llamar desde sistema usuario a traves de la fachada
-    public void agregar(Jugador j){
-        listaEspera.add(j);
-        if(listaEspera.size()==configuracion.getParticipantes()){
-            crearJuego();
+    public Juego agregar(Jugador j){
+        Participante p = new Participante(j);
+        juegoEspera.agregar(p);
+        int numero = configuracion.getParticipantes(); //ROMPE ENCAPSULAMIENTO?
+        if(juegoEspera.lleno(numero)){   
+            return empezarJuego();
         }
+        return juegoEspera;
     }
     
-    
-    
-    //ES BUENA PRACTICA USAR DOS METODOS SEPARADOS DENTRO DE LA CLASE EN VEZ DE UNO GRANDE
-    public void crearJuego(){
-        Juego juego = new Juego();
-        for(Jugador j : listaEspera){
-            Participante p = new Participante(j);    //ES LA MANERA CORRECTA DE HACERLO??
-            juego.agregar(p);
-        }
-        juegos.add(juego);
+    private Juego empezarJuego() {
+        Juego porComenzar = juegoEspera;
+        porComenzar.datosIniciales();
+        juegos.add(porComenzar);
+        nuevoJuegoEspera();
+        //DISPARA EVENTO OBSERVER ----------------------------------------------
+        return porComenzar;
+        
     }
-    
-    
-    
 }

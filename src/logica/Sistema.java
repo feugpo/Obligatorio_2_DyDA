@@ -49,6 +49,10 @@ public class Sistema {
         return sUsuarios.loginAdmin(n, c);
     }
 
+    public Juego agregar(Jugador j) {
+        return sJuegos.agregar(j);
+    }
+
     
     
     

@@ -28,15 +28,11 @@ public class Jugador extends Usuario {
     void pagar(int monto) {
         saldo -= monto;
     }
+
+   
+
+    
      
-    
   
-    
-    
-
-    
-
-    
-    
     
 }

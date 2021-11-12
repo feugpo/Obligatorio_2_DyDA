@@ -23,7 +23,7 @@ public class Inicio {
         
         //PRECARGA DE DATOS
         DatosPrueba.cargar();
-        //CARGA UI
+        new LoginSeleccion().setVisible(true);
     }
     
 }

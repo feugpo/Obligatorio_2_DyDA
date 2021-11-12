@@ -24,5 +24,10 @@ public class LoginAdministrador extends LoginGenerico {
        Administrador usu=Sistema.getInstancia().loginAdmin(nombre, contrasena);
        return usu;
     }
+
+    @Override
+    public void pantallaSiguiente(Object usu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

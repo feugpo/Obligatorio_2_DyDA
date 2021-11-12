@@ -5,6 +5,8 @@
  */
 package iu;
 
+
+
 /**
  *
  * @author Gabriel
@@ -14,10 +16,14 @@ public class LoginSeleccion extends javax.swing.JDialog {
     /**
      * Creates new form LoginSeleccion
      */
-    public LoginSeleccion(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public LoginSeleccion() {
         initComponents();
+        setLocationRelativeTo(null);
     }
+
+   
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,9 +92,9 @@ public class LoginSeleccion extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(jRadioJugador.isSelected()){
-            
+            new LoginJugador(null,false).setVisible(true);
         }else{
-            
+             new LoginAdministrador(null,false).setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

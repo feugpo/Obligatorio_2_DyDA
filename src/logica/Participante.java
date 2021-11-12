@@ -16,10 +16,11 @@ public class Participante {
     private int totalGanado;
     private Mano mano;
 
-    public Participante(Jugador jugador) {
-        this.jugador = jugador;
-        this.saldoInicial = jugador.getSaldo();
-        
+    public Participante(Jugador j) {
+        jugador = j;
+        saldoInicial = 0;
+        totalApostado = 0;
+        totalGanado = 0;
     }
 
     public Mano getMano() {
@@ -35,7 +36,11 @@ public class Participante {
     }
 
     public void setTotalApostado(int totalApostado) {
-        this.totalApostado = totalApostado;
+        totalApostado = totalApostado;
+    }
+
+    public void setTotalGanado(int totalGanado) {
+        totalGanado = totalGanado;
     }
     
     public void sumarApostado(int monto){
@@ -47,10 +52,21 @@ public class Participante {
     }
     //LO PRECISO SI TENGO Q REINICIAR LA MANO PARA CADA NUEVA RONDA
     public void nuevaMano(){       
-        this.mano = new Mano();
+        mano = new Mano();
     }
     
-    
-    
-    
+    public void iniciarSaldo(){
+        saldoInicial = jugador.getSaldo();
+    }
+
+    public boolean comparar(Jugador j) {
+        return jugador.equals(j);
+    }
+
+    public int getSaldoInicial() {
+        return saldoInicial;
+    }
+  
 }
+    
+

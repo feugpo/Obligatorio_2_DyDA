@@ -17,13 +17,13 @@ public class Juego {
     private ArrayList<Participante> retirados = new ArrayList();
     private int rondas;
     private Ronda rondaActual;
-    private Date fecha = new Date();
+    private Date fecha;
 
     public Juego() {
     }
     
     public void agregar(Participante p){
-        this.participantes.add(p);
+        participantes.add(p);
     }
     
     public void crearRonda(){
@@ -39,8 +39,31 @@ public class Juego {
         participantes.remove(p);
         retirados.add(p);
     }
-    
-    
-    
-    
+
+    public boolean lleno(int maximo) {
+        return participantes.size() == maximo; 
+    }
+
+    void datosIniciales() {
+        fecha = new Date();
+        for(Participante p : participantes){
+            p.iniciarSaldo();
+        }
+        
+    }
+
+    public ArrayList<Participante> getParticipantes() {
+        return participantes;
+    }
+     public Participante buscar(Jugador j) {
+        for(Participante p:participantes){
+           if(p.comparar(j)) {
+               return p;
+           }
+        }
+        return null;
+        
+    }
 }
+    
+

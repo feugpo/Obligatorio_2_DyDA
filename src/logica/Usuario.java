@@ -5,6 +5,8 @@
  */
 package logica;
 
+import java.util.Objects;
+
 /**
  *
  * @author Fernando
@@ -28,8 +30,34 @@ public abstract class Usuario {
         return contrasenha;
     }
 
-    
+   
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.nombreUsuario, other.nombreUsuario)) {
+            return false;
+        }
+        if (!Objects.equals(this.contrasenha, other.contrasenha)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombreCompleto, other.nombreCompleto)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
     
     
 }

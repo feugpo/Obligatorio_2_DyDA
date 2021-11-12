@@ -5,6 +5,10 @@
  */
 package iu;
 
+import logica.Juego;
+import logica.Jugador;
+import logica.Sistema;
+
 /**
  *
  * @author Gabriel
@@ -17,6 +21,7 @@ public abstract class LoginGenerico extends javax.swing.JDialog {
     public LoginGenerico(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -131,11 +136,12 @@ public abstract class LoginGenerico extends javax.swing.JDialog {
           jMensaje.setText("Login Incorrecto");
         }
         else{
-            
+          
+          pantallaSiguiente(usu);
         }
     }
 
     public abstract Object loginPolimorfico(String nombre, String contrasena);
-       
+    public abstract void pantallaSiguiente(Object usu);   
     
 }
