@@ -23,14 +23,14 @@ public class DatosPrueba {
         Sistema sistema = Sistema.getInstancia();
         
         //JUGADORES
-        sistema.agregarJugador("Maria", "123456", "Maria Gomez", 500);
-        sistema.agregarJugador("Juan", "123789", "Juan Cruz", 1500);
-        sistema.agregarJugador("Nicolas", "123741", "Nicolas Barreiro", 80);
-        sistema.agregarJugador("Ana", "123963", "Ana Maria",60);
-        sistema.agregarJugador("Pedro", "123852", "Pedro FlintStone", 120);
+        sistema.agregarJugador("Maria", "123", "Maria Gomez", 500);
+        sistema.agregarJugador("Juan", "123", "Juan Cruz", 1500);
+        sistema.agregarJugador("Nicolas", "123", "Nicolas Barreiro", 80);
+        sistema.agregarJugador("Ana", "123", "Ana Maria",60);
+        sistema.agregarJugador("Pedro", "123", "Pedro FlintStone", 120);
         //ADMINISTRADORES
-        sistema.agregarUsuarioAdmin("Gabriel", "asd123", "Gabriel Abelenda");
-        sistema.agregarUsuarioAdmin("Fernando", "qwerty", "Fernando Ugarte");
+        sistema.agregarUsuarioAdmin("Gabriel", "123", "Gabriel Abelenda");
+        sistema.agregarUsuarioAdmin("Fernando", "123", "Fernando Ugarte");
         //CONFIGURACION
         //luz
         int luz = 5;
@@ -62,10 +62,10 @@ public class DatosPrueba {
         valores.add(new Valor("A", 14));
         //palos de cartas
         ArrayList<Palo> palos = new ArrayList();
-        palos.add(new Palo("Pique",1));
-        palos.add(new Palo("Trebol",2));
-        palos.add(new Palo("Diamante",3));
-        palos.add(new Palo("Corazon",4));
+        palos.add(new Palo("p",1));
+        palos.add(new Palo("t",2));
+        palos.add(new Palo("d",3));
+        palos.add(new Palo("c",4));
         sistema.crearConfiguracion(luz, participantes, figuras, valores, palos);
         //COMO AVISAR SI LA LUZ O PARTICIPANTES NO SON VÁLIDOS?
         
