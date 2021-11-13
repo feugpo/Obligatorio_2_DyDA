@@ -5,13 +5,14 @@
  */
 package logica;
 
+import Observer.Observable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Fernando
  */
-public class Ronda {
+public class Ronda extends Observable {
     private ArrayList<Participante> participantes = new ArrayList();
     private ArrayList<Participante> pasadores = new ArrayList();
     private int apuesta;
@@ -19,6 +20,9 @@ public class Ronda {
     private Mazo mazo;
     private Pozo pozo;
     
+    
+    public enum Eventos{apuestaNueva,hayGanador};
+     
     public Ronda() {
         this.mazo = new Mazo();
         this.pozo = new Pozo();

@@ -5,6 +5,7 @@
  */
 package logica;
 
+import Observer.Observable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,13 +13,16 @@ import java.util.Date;
  *
  * @author Fernando
  */
-public class Juego {
+public class Juego extends Observable {
     private ArrayList<Participante> participantes = new ArrayList();
     private ArrayList<Participante> retirados = new ArrayList();
     private int rondas;
     private Ronda rondaActual;
     private Date fecha;
 
+    public enum Eventos{rondaNueva};
+    
+    
     public Juego() {
     }
     

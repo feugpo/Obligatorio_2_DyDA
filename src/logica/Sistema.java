@@ -5,18 +5,21 @@
  */
 package logica;
 
+import Observer.Observable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Fernando
  */
-public class Sistema {
+public class Sistema extends Observable {
+    
     private SistemaUsuarios sUsuarios = new SistemaUsuarios();
     private SistemaJuegos sJuegos = new SistemaJuegos();
     private static Sistema instancia = new Sistema();
 
-    //public enum Eventos{cambioListaUsuariosConectados,nuevoContactoDeCualquierAgenda};
+    
+    public enum Eventos{juegoNuevo};
     
     public static Sistema getInstancia() {
         return instancia;
