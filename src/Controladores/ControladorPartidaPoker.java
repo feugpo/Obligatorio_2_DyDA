@@ -15,6 +15,7 @@ import logica.Sistema;
  */
 public class ControladorPartidaPoker implements Observador {
     
+    
     private VistaPartidaPoker vista;
     private Participante participante;
     private Sistema fachada= Sistema.getInstancia();
