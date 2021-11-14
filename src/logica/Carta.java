@@ -5,6 +5,8 @@
  */
 package logica;
 
+import java.util.Objects;
+
 /**
  *
  * @author Fernando
@@ -24,6 +26,19 @@ public class Carta {
     }
 
    
+
+    public Palo getPalo() {
+        return palo;
+    }
+
+    public Valor getValor() {
+        return valor;
+    }
+    
+    
+    
+
+
     
     
     

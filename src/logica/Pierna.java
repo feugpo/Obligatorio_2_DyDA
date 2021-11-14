@@ -14,5 +14,10 @@ public class Pierna extends Figura {
     public Pierna(String nombre, int puntaje) {
         super(nombre, puntaje);
     }
+
+    @Override
+    public void evaluar(Mano mano) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

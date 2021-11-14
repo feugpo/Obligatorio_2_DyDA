@@ -6,7 +6,7 @@
 package iu;
 
 import java.util.ArrayList;
-import logica.DoblePar;
+import logica.Color;
 import logica.Figura;
 import logica.Palo;
 import logica.Par;
@@ -39,11 +39,11 @@ public class DatosPrueba {
         //figuras posibles
         ArrayList<Figura> figuras = new ArrayList();
         Par par = new Par("par", 1);
-        DoblePar doblePar = new DoblePar("doble par", 2);
-        Pierna pierna = new Pierna("pierna", 3);
+        Pierna pierna = new Pierna("pierna", 2);
+        Color color = new Color("color", 3);
         figuras.add(par);
-        figuras.add(doblePar);
         figuras.add(pierna);
+        figuras.add(color);
         //valores de cartas
         ArrayList<Valor> valores = new ArrayList();
         valores.add(new Valor("1", 1));

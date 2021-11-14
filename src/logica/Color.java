@@ -9,10 +9,15 @@ package logica;
  *
  * @author Fernando
  */
-public class DoblePar extends Figura {
-
-    public DoblePar(String nombre, int puntaje) {
+public class Color extends Figura{
+    
+    public Color(String nombre, int puntaje) {
         super(nombre, puntaje);
+    }
+
+    @Override
+    public void evaluar(Mano mano) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
