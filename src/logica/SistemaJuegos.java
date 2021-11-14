@@ -42,6 +42,7 @@ public class SistemaJuegos {
         if(juegoEspera.lleno(numero)){   
             return empezarJuego();
         }
+        //agregar un evento para se agrego una persona a lista espera
         return juegoEspera;
     }
     
@@ -50,7 +51,7 @@ public class SistemaJuegos {
         porComenzar.datosIniciales();
         juegos.add(porComenzar);
         nuevoJuegoEspera();
-        //DISPARA EVENTO OBSERVER ----------------------------------------------
+       Sistema.getInstancia().avisar(Sistema.Eventos.juegoNuevo);
         return porComenzar;
         
     }
