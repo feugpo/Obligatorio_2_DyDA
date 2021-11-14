@@ -18,6 +18,10 @@ public class Valor {
         this.puntaje = puntaje;
     }
 
+    public String getValor() {
+        return valor;
+    }
+
    
 
     

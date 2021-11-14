@@ -23,9 +23,11 @@ public class Ronda extends Observable {
     
     public enum Eventos{apuestaNueva,hayGanador};
      
-    public Ronda() {
+    public Ronda(ArrayList<Participante> p) {
         this.mazo = new Mazo();
         this.pozo = new Pozo();
+        participantes=p;
+        repartir(); //esto es correcto?
     }
 
     public Ronda(ArrayList<Participante> pptes, Pozo pozo) {
@@ -74,6 +76,7 @@ public class Ronda extends Observable {
         p.getJugador().pagar(monto);
         p.sumarApostado(monto);
         pozo.agregar(monto);
+        
     }
     
     // NO SE SI LO VAMOS A HACER ASÍ

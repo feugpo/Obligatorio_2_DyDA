@@ -31,12 +31,10 @@ public class Juego extends Observable {
     }
     
     public void crearRonda(){
-        Ronda ronda = new Ronda();
-        for(Participante p : participantes){
-            ronda.agregar(p);
-        }
+        Ronda ronda = new Ronda(participantes);
         rondas++;
         rondaActual = ronda;
+        avisar(Eventos.rondaNueva);
     }
     
     public void retirarse(Participante p){

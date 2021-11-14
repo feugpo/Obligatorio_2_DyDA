@@ -6,6 +6,7 @@
 package Vistas;
 
 import logica.Juego;
+import logica.Participante;
 
 /**
  *
@@ -14,5 +15,6 @@ import logica.Juego;
 public interface VistaPartidaPoker {
     
     
-    public void cargarJuego(Juego j);
+    public void cargarVistaParticipante(Participante p);
+   
 }

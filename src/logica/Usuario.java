@@ -22,6 +22,10 @@ public abstract class Usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
     public String getNombreUsuario() {
         return nombreUsuario;
     }

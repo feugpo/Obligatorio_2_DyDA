@@ -18,6 +18,11 @@ public class Carta {
         this.valor = valor;
     }
 
+    public String generarString() {
+        
+        return "C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\"+valor.getValor()+palo.getPalo()+".gif";
+    }
+
    
     
     

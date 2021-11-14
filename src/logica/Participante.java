@@ -5,11 +5,14 @@
  */
 package logica;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Fernando
  */
 public class Participante {
+
     private Jugador jugador;
     private int saldoInicial;
     private int totalApostado;
@@ -42,20 +45,21 @@ public class Participante {
     public void setTotalGanado(int totalGanado) {
         totalGanado = totalGanado;
     }
-    
-    public void sumarApostado(int monto){
-        totalApostado += monto; 
+
+    public void sumarApostado(int monto) {
+        totalApostado += monto;
     }
-    
-    public void sumarGanado(int monto){
-        totalGanado += monto; 
+
+    public void sumarGanado(int monto) {
+        totalGanado += monto;
     }
+
     //LO PRECISO SI TENGO Q REINICIAR LA MANO PARA CADA NUEVA RONDA
-    public void nuevaMano(){       
+    public void nuevaMano() {
         mano = new Mano();
     }
-    
-    public void iniciarSaldo(){
+
+    public void iniciarSaldo() {
         saldoInicial = jugador.getSaldo();
     }
 
@@ -66,7 +70,15 @@ public class Participante {
     public int getSaldoInicial() {
         return saldoInicial;
     }
-  
-}
-    
 
+    public ArrayList<String> generarUrlCarta() {
+        
+        ArrayList<String> retorno = new ArrayList();
+        for (Carta c : mano.getCartas()) {
+            retorno.add(c.generarString());
+
+        }
+        return retorno;
+    }
+
+}

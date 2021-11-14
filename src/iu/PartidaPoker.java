@@ -5,27 +5,34 @@
  */
 package iu;
 
+import Controladores.ControladorPartidaPoker;
+import Vistas.VistaPartidaPoker;
+import java.util.ArrayList;
 import logica.Juego;
 import logica.Participante;
+import javax.swing.*;
 
 /**
  *
  * @author Gabriel
  */
-public class PartidaPoker extends javax.swing.JDialog {
+public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPoker{
 
     /**
      * Creates new form PartidaPoker
      */
-    private Participante participante;
-    private Juego juego;
+    private ControladorPartidaPoker ctrlPoker;
     public PartidaPoker(java.awt.Frame parent, boolean modal,Juego juego,Participante participante) {
         super(parent, modal);
         initComponents();
-        this.participante=participante;
-        this.juego=juego;
+        this.ctrlPoker=new ControladorPartidaPoker(this,juego,participante) ;
+       
         
     }
+
+  
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,25 +57,30 @@ public class PartidaPoker extends javax.swing.JDialog {
         jMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMensaje.setText("ESPERANDO PARA EMPEZAR");
 
-        jCarta1.setIcon(new javax.swing.ImageIcon("C:\\Users\\elmef\\Desktop\\Clon obligatorio\\cartas\\cartas\\Invertida.gif")); // NOI18N
+        jCarta1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
         jCarta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCarta1ActionPerformed(evt);
             }
         });
+        jCarta1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCarta1PropertyChange(evt);
+            }
+        });
 
-        jCarta2.setIcon(new javax.swing.ImageIcon("C:\\Users\\elmef\\Desktop\\Clon obligatorio\\cartas\\cartas\\Invertida.gif")); // NOI18N
+        jCarta2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
         jCarta2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCarta2ActionPerformed(evt);
             }
         });
 
-        jCarta3.setIcon(new javax.swing.ImageIcon("C:\\Users\\elmef\\Desktop\\Clon obligatorio\\cartas\\cartas\\Invertida.gif")); // NOI18N
+        jCarta3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
 
-        jCarta4.setIcon(new javax.swing.ImageIcon("C:\\Users\\elmef\\Desktop\\Clon obligatorio\\cartas\\cartas\\Invertida.gif")); // NOI18N
+        jCarta4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
 
-        jCarta5.setIcon(new javax.swing.ImageIcon("C:\\Users\\elmef\\Desktop\\Clon obligatorio\\cartas\\cartas\\Invertida.gif")); // NOI18N
+        jCarta5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
 
         jBtnApostar.setText("APOSTAR");
         jBtnApostar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +134,7 @@ public class PartidaPoker extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBtnApostar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBtnPasar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,6 +152,10 @@ public class PartidaPoker extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnApostarActionPerformed
 
+    private void jCarta1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCarta1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCarta1PropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -155,4 +171,25 @@ public class PartidaPoker extends javax.swing.JDialog {
     private javax.swing.JButton jCarta5;
     private javax.swing.JLabel jMensaje;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void cargarVistaParticipante(Participante p) {
+        this.setTitle(p.getJugador().getNombreCompleto());
+        asignarRutaBoton(ctrlPoker.rutaCartas());
+    }
+    
+    
+    private void asignarRutaBoton(ArrayList<String> rutas){
+    Icon c1=new ImageIcon(rutas.get(0));
+    jCarta1.setIcon(c1);
+    Icon c2=new ImageIcon(rutas.get(1));
+    jCarta2.setIcon(c2);
+    Icon c3=new ImageIcon(rutas.get(2));
+    jCarta3.setIcon(c3);
+    Icon c4=new ImageIcon(rutas.get(3));
+    jCarta4.setIcon(c4);
+    Icon c5=new ImageIcon(rutas.get(4));
+    jCarta5.setIcon(c5);
+    }
+    
 }

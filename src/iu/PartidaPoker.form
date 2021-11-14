@@ -71,7 +71,7 @@
                   <Component id="jBtnApostar" max="32767" attributes="0"/>
                   <Component id="jBtnPasar" min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="68" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -86,17 +86,18 @@
     <Component class="javax.swing.JButton" name="jCarta1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\elmef\Desktop\Clon obligatorio\cartas\cartas\Invertida.gif"/>
+          <Image iconType="2" name="C:\Users\Gabriel\Documents\NetBeansProjects\cartas\Invertida.gif"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCarta1ActionPerformed"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jCarta1PropertyChange"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jCarta2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\elmef\Desktop\Clon obligatorio\cartas\cartas\Invertida.gif"/>
+          <Image iconType="2" name="C:\Users\Gabriel\Documents\NetBeansProjects\cartas\Invertida.gif"/>
         </Property>
       </Properties>
       <Events>
@@ -106,21 +107,21 @@
     <Component class="javax.swing.JButton" name="jCarta3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\elmef\Desktop\Clon obligatorio\cartas\cartas\Invertida.gif"/>
+          <Image iconType="2" name="C:\Users\Gabriel\Documents\NetBeansProjects\cartas\Invertida.gif"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jCarta4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\elmef\Desktop\Clon obligatorio\cartas\cartas\Invertida.gif"/>
+          <Image iconType="2" name="C:\Users\Gabriel\Documents\NetBeansProjects\cartas\Invertida.gif"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jCarta5">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\elmef\Desktop\Clon obligatorio\cartas\cartas\Invertida.gif"/>
+          <Image iconType="2" name="C:\Users\Gabriel\Documents\NetBeansProjects\cartas\Invertida.gif"/>
         </Property>
       </Properties>
     </Component>

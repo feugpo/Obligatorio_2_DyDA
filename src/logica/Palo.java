@@ -18,6 +18,10 @@ public class Palo {
         this.puntaje = puntaje;
     }
 
+    public String getPalo() {
+        return palo;
+    }
+
     
     
     
