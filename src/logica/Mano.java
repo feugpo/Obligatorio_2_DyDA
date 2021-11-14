@@ -26,6 +26,24 @@ public class Mano {
     public void agregar(Carta c){
         cartas.add(c);
     }
+
+    public Figura getFigura() {
+        return figura;
+    }
+
+    public void setFigura(Figura figura) {
+        this.figura = figura;
+    }
+
+    public Carta getLaMasAlta() {
+        return laMasAlta;
+    }
+
+    public void setLaMasAlta(Carta laMasAlta) {
+        this.laMasAlta = laMasAlta;
+    }
+    
+    
     
     
 }

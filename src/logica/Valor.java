@@ -18,7 +18,10 @@ public class Valor {
         this.puntaje = puntaje;
     }
 
-   
+    public int compareTo(Valor v){
+        int ret = Integer.compare(v.puntaje, this.puntaje);
+        return ret;
+    }
 
     
     

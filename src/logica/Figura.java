@@ -5,6 +5,8 @@
  */
 package logica;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Fernando
@@ -18,5 +20,10 @@ public abstract class Figura {
         this.puntaje = puntaje;
     }
     
+    public abstract void evaluar(Mano mano);
     
+    public int compareTo(Figura f){
+        int ret = Integer.compare(f.puntaje, this.puntaje);
+        return ret;
+    }
 }
