@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Mano {
     private ArrayList<Carta> cartas = new ArrayList();
     private Figura figura;
+    private ArrayList<Carta> figuraCartas;
     private Carta laMasAlta;
 
     public Mano() {
@@ -42,6 +43,15 @@ public class Mano {
     public void setLaMasAlta(Carta laMasAlta) {
         this.laMasAlta = laMasAlta;
     }
+
+    public ArrayList<Carta> getFiguraCartas() {
+        return figuraCartas;
+    }
+
+    public void setFiguraCartas(ArrayList<Carta> figuraCartas) {
+        this.figuraCartas = figuraCartas;
+    }
+    
     
     
     

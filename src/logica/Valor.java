@@ -9,7 +9,7 @@ package logica;
  *
  * @author Fernando
  */
-public class Valor {
+public class Valor implements Comparable<Valor> {
     private String valor;
     private int puntaje;
 
@@ -23,12 +23,15 @@ public class Valor {
         return valor;
     }
 
-   
-
-    public int compareTo(Valor v){
-        int ret = Integer.compare(v.puntaje, this.puntaje);
+    @Override
+    public int compareTo(Valor v) {
+        int ret = Integer.compare(this.puntaje, v.puntaje);
         return ret;
     }
+
+   
+
+   
 
     
     

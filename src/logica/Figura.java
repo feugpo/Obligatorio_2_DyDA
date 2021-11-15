@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Fernando
  */
-public abstract class Figura {
+public abstract class Figura implements Comparable<Figura>{
     private String nombre;
     private int puntaje;
 
@@ -21,9 +21,13 @@ public abstract class Figura {
     }
     
     public abstract void evaluar(Mano mano);
-    
-    public int compareTo(Figura f){
+
+    @Override
+    public int compareTo(Figura f) {
         int ret = Integer.compare(f.puntaje, this.puntaje);
         return ret;
     }
+    
+    
+    
 }

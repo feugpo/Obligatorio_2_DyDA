@@ -20,6 +20,7 @@ public class Par extends Figura {
     @Override
     public void evaluar(Mano mano) {
         ArrayList<Carta> m = mano.getCartas();
+        //Compara buscando iguales
         for (int x = 0; x < 4; x++) {
             ArrayList<Carta> aux = new ArrayList();
             aux.add(m.get(x));
@@ -30,19 +31,23 @@ public class Par extends Figura {
                 }
                 y++;
             }
+            //Si las iguales son un par
             if (aux.size() == 2) {
-                Carta max = null;
-                //if(aux.get(0)>aux.get(1))max = aux.get(0);
-
-                if (mano.getFigura() != null) {
-
-                } else {
+                //Si hay una figura existente Y es un par
+                if (mano.getFigura() != null && this.compareTo(mano.getFigura()) == 0) {
+                    int comp = aux.get(0).compareTo(mano.getFiguraCartas().get(0));   // EMPROLIJAR TODO ESTO 
+                    //Si la carta del par encontrado es mayor a la del guardado => lo sustituyo
+                    if (comp > 0) {
+                        mano.setFigura(this);
+                        mano.setFiguraCartas(aux);
+                    }
+                } else if(mano.getFigura() == null) {
+                    //si no hay figura => uso la q encontre
                     mano.setFigura(this);
-
+                    mano.setFiguraCartas(aux);
                 }
+                //si hay una figura y es mayor => no asigna nada
             }
         }
-
     }
-
 }

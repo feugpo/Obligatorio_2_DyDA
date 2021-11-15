@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Fernando
  */
-public class Carta {
+public class Carta implements Comparable<Carta> {
     private Palo palo;
     private Valor valor;
 
@@ -34,6 +34,17 @@ public class Carta {
     public Valor getValor() {
         return valor;
     }
+
+    @Override
+    public int compareTo(Carta c) {
+        int ret = valor.compareTo(c.getValor());
+        if(ret == 0){
+            ret = palo.compareTo(c.getPalo());
+        }
+        return ret;
+    }
+
+    
     
     
     

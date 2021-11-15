@@ -5,19 +5,38 @@
  */
 package logica;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Fernando
  */
-public class Color extends Figura{
-    
+public class Color extends Figura {
+
     public Color(String nombre, int puntaje) {
         super(nombre, puntaje);
     }
 
     @Override
     public void evaluar(Mano mano) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Carta> m = mano.getCartas();
+        Carta primera = m.get(0);
+        boolean mismo = true;
+        int i = 1;
+        while (i < 5 && mismo) {
+            if (primera.getPalo() != m.get(i).getPalo()) {
+                mismo = false;
+            }
+            i++;
+        }
+        if (mismo) {
+            if (mano.getFigura() != null && this.compareTo(mano.getFigura()) > 0) {
+                mano.setFigura(this);
+            } else if (mano.getFigura() == null) {
+                mano.setFigura(this);
+            }
+        }
     }
     
+
 }

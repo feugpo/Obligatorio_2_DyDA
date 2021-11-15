@@ -9,7 +9,7 @@ package logica;
  *
  * @author Fernando
  */
-public class Palo {
+public class Palo implements Comparable<Palo> {
     private String palo;
     private int puntaje;
 
@@ -20,6 +20,12 @@ public class Palo {
 
     public String getPalo() {
         return palo;
+    }
+
+    @Override
+    public int compareTo(Palo p) {
+        int ret = Integer.compare(this.puntaje, p.puntaje);
+        return ret;
     }
 
     
