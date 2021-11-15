@@ -43,6 +43,7 @@ public class Ronda extends Observable {
     public void repartir(){
         mazo.barajar();
         for(Participante p : participantes){
+            p.nuevaMano();
             int i = 0;
             while(i<5){
                 Carta c = mazo.tomarUna(); //metodo en mazo tomar una
@@ -76,6 +77,8 @@ public class Ronda extends Observable {
         p.getJugador().pagar(monto);
         p.sumarApostado(monto);
         pozo.agregar(monto);
+        this.apuesta=monto;
+        avisar(Eventos.apuestaNueva);
         
     }
     

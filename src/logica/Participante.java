@@ -81,4 +81,8 @@ public class Participante {
         return retorno;
     }
 
+    public boolean tieneMano() {
+        return getMano()!=null;
+    }
+
 }

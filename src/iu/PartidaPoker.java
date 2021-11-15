@@ -16,23 +16,20 @@ import javax.swing.*;
  *
  * @author Gabriel
  */
-public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPoker{
+public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPoker {
 
     /**
      * Creates new form PartidaPoker
      */
     private ControladorPartidaPoker ctrlPoker;
-    public PartidaPoker(java.awt.Frame parent, boolean modal,Juego juego,Participante participante) {
+
+    public PartidaPoker(java.awt.Frame parent, boolean modal, Juego juego, Participante participante) {
         super(parent, modal);
         initComponents();
-        this.ctrlPoker=new ControladorPartidaPoker(this,juego,participante) ;
-       
-        
-    }
+        this.ctrlPoker = new ControladorPartidaPoker(this, juego, participante);
+        cargarVistaParticipante(participante);
 
-  
-    
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,7 +146,12 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }//GEN-LAST:event_jCarta2ActionPerformed
 
     private void jBtnApostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnApostarActionPerformed
-        // TODO add your handling code here:
+
+        int respuesta = Integer.parseInt(JOptionPane.showInputDialog(this, "Cuanto apuesta?", "Ingresar apuesta", -1));
+        ctrlPoker.apostar(respuesta);
+        
+
+
     }//GEN-LAST:event_jBtnApostarActionPerformed
 
     private void jCarta1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCarta1PropertyChange
@@ -159,7 +161,6 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnApostar;
@@ -175,21 +176,28 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     @Override
     public void cargarVistaParticipante(Participante p) {
         this.setTitle(p.getJugador().getNombreCompleto());
-        asignarRutaBoton(ctrlPoker.rutaCartas());
+        if (p.tieneMano()) {
+            asignarRutaBoton(ctrlPoker.rutaCartas());
+        }
+
     }
-    
-    
-    private void asignarRutaBoton(ArrayList<String> rutas){
-    Icon c1=new ImageIcon(rutas.get(0));
-    jCarta1.setIcon(c1);
-    Icon c2=new ImageIcon(rutas.get(1));
-    jCarta2.setIcon(c2);
-    Icon c3=new ImageIcon(rutas.get(2));
-    jCarta3.setIcon(c3);
-    Icon c4=new ImageIcon(rutas.get(3));
-    jCarta4.setIcon(c4);
-    Icon c5=new ImageIcon(rutas.get(4));
-    jCarta5.setIcon(c5);
+
+    private void asignarRutaBoton(ArrayList<String> rutas) {
+        Icon c1 = new ImageIcon(rutas.get(0));
+        jCarta1.setIcon(c1);
+        Icon c2 = new ImageIcon(rutas.get(1));
+        jCarta2.setIcon(c2);
+        Icon c3 = new ImageIcon(rutas.get(2));
+        jCarta3.setIcon(c3);
+        Icon c4 = new ImageIcon(rutas.get(3));
+        jCarta4.setIcon(c4);
+        Icon c5 = new ImageIcon(rutas.get(4));
+        jCarta5.setIcon(c5);
     }
-    
+
+    @Override
+    public void alertarApuesta() {
+      JOptionPane.showOptionDialog(this, "Aceptas o rechazas?", "Aceptar Apuesta",-1,JOptionPane.OK_CANCEL_OPTION,null,new String[]{"Acepto","Rechazo"},"default");
+    }
+
 }

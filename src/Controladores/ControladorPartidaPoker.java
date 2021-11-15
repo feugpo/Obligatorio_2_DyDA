@@ -10,6 +10,7 @@ import Vistas.VistaPartidaPoker;
 import java.util.ArrayList;
 import logica.Juego;
 import logica.Participante;
+import logica.Ronda;
 import logica.Sistema;
 /**
  *
@@ -29,16 +30,26 @@ public class ControladorPartidaPoker implements Observador {
         this.juego=juego;
         fachada.agregar(this);
         juego.agregar(this);
+        
     }
 
     @Override
     public void actualizar(Object evento, Observable origen) {
-       if(evento.equals(Sistema.Eventos.juegoNuevo)){
+       if(evento.equals(Juego.Eventos.rondaNueva)){
            vista.cargarVistaParticipante(participante);
+           juego.getRondaActual().agregar(this);//Esto se debe hacer acá?
+       }
+       if(evento.equals(Ronda.Eventos.apuestaNueva)){
+           vista.alertarApuesta();
+           
        }
     }
     
    public ArrayList<String> rutaCartas(){
        return participante.generarUrlCarta();
     }  
+
+    public void apostar(int apuesta) {
+        juego.getRondaActual().apostar(participante, apuesta);
+    }
 }

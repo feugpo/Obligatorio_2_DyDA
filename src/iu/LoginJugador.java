@@ -31,9 +31,7 @@ public class LoginJugador extends LoginGenerico {
     public void pantallaSiguiente(Object usu) {
        Juego j =Sistema.getInstancia().agregar((Jugador) usu);
        Participante p=j.buscar((Jugador) usu);
-       if(p.getSaldoInicial()>0){
-         new PartidaPoker(null,false,j,p).setVisible(true);
-       }
+       new PartidaPoker(null,false,j,p).setVisible(true);
     }
     
 }

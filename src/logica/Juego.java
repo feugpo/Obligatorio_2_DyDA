@@ -21,6 +21,10 @@ public class Juego extends Observable {
     private Date fecha;
 
     public enum Eventos{rondaNueva};
+
+    public Ronda getRondaActual() {
+        return rondaActual;
+    }
     
     
     public Juego() {

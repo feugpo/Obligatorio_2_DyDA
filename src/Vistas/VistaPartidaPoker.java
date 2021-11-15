@@ -16,5 +16,7 @@ public interface VistaPartidaPoker {
     
     
     public void cargarVistaParticipante(Participante p);
+
+    public void alertarApuesta();
    
 }

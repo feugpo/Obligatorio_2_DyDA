@@ -51,7 +51,8 @@ public class SistemaJuegos {
         porComenzar.datosIniciales();
         juegos.add(porComenzar);
         nuevoJuegoEspera();
-       Sistema.getInstancia().avisar(Sistema.Eventos.juegoNuevo);
+        Sistema.getInstancia().avisar(Sistema.Eventos.juegoNuevo);
+        porComenzar.crearRonda();
         return porComenzar;
         
     }
