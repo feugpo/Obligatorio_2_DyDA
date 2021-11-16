@@ -23,15 +23,15 @@ public class LoginJugador extends LoginGenerico {
 
     @Override
     public Object loginPolimorfico(String nombre, String contrasena) {
-       Jugador usu=Sistema.getInstancia().loginJugador(nombre, contrasena);
-       return usu;
+        Jugador usu = Sistema.getInstancia().loginJugador(nombre, contrasena);
+        return usu;
     }
 
     @Override
     public void pantallaSiguiente(Object usu) {
-       Juego j =Sistema.getInstancia().agregar((Jugador) usu);
-       Participante p=j.buscar((Jugador) usu);
-       new PartidaPoker(null,false,j,p).setVisible(true);
+        Juego j = Sistema.getInstancia().agregar((Jugador) usu);
+        Participante p = j.buscar((Jugador) usu);
+        new PartidaPoker(null, false, j, p).setVisible(true);
     }
-    
+
 }

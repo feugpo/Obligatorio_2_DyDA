@@ -21,8 +21,8 @@ public class Carta implements Comparable<Carta> {
     }
 
     public String generarString() {
-        
-        return "C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\"+valor.getValor()+palo.getPalo()+".gif";
+        //MOVER CARPETA CARTAS PARA ADENTRO DEL PROJECT Y USAR "./IMAGENES"
+        return System.getProperty("user.dir")+"\\..\\cartas\\"+valor.getValor()+palo.getPalo()+".gif";
     }
 
    
@@ -43,6 +43,8 @@ public class Carta implements Comparable<Carta> {
         }
         return ret;
     }
+
+    
 
     
     

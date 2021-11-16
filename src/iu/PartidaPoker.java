@@ -27,8 +27,7 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         super(parent, modal);
         initComponents();
         this.ctrlPoker = new ControladorPartidaPoker(this, juego, participante);
-        cargarVistaParticipante(participante);
-
+        
     }
 
     /**
@@ -146,12 +145,8 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }//GEN-LAST:event_jCarta2ActionPerformed
 
     private void jBtnApostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnApostarActionPerformed
-
         int respuesta = Integer.parseInt(JOptionPane.showInputDialog(this, "Cuanto apuesta?", "Ingresar apuesta", -1));
         ctrlPoker.apostar(respuesta);
-        
-
-
     }//GEN-LAST:event_jBtnApostarActionPerformed
 
     private void jCarta1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCarta1PropertyChange
@@ -176,9 +171,13 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     @Override
     public void cargarVistaParticipante(Participante p) {
         this.setTitle(p.getJugador().getNombreCompleto());
-        if (p.tieneMano()) {
-            asignarRutaBoton(ctrlPoker.rutaCartas());
-        }
+        asignarRutaBoton(ctrlPoker.rutaCartas());
+        
+//        if (p.tieneMano()) {
+//            asignarRutaBoton(ctrlPoker.rutaCartas());
+//        }else{
+//            asignarRutaBoton(ctrlPoker.rutaCartas());
+//        }
 
     }
 
@@ -194,10 +193,21 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         Icon c5 = new ImageIcon(rutas.get(4));
         jCarta5.setIcon(c5);
     }
+    
+    
 
     @Override
     public void alertarApuesta() {
-      JOptionPane.showOptionDialog(this, "Aceptas o rechazas?", "Aceptar Apuesta",-1,JOptionPane.OK_CANCEL_OPTION,null,new String[]{"Acepto","Rechazo"},"default");
+        int respuesta = JOptionPane.showOptionDialog(this, "Aceptas o rechazas?", "Aceptar Apuesta", -1, JOptionPane.OK_CANCEL_OPTION, null, new String[]{"Acepto", "Rechazo"}, "default");
+        if (respuesta == 0) {
+            //acepta
+            ctrlPoker.aceptarApuesta();
+        } else {
+            //rechaza
+            ctrlPoker.rechazarApuesta();
+        }
     }
+
+    
 
 }

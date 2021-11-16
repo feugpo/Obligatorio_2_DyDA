@@ -13,14 +13,17 @@ import java.util.ArrayList;
  * @author Fernando
  */
 public class Sistema extends Observable {
-    
+
     private SistemaUsuarios sUsuarios = new SistemaUsuarios();
     private SistemaJuegos sJuegos = new SistemaJuegos();
     private static Sistema instancia = new Sistema();
 
-    
-    public enum Eventos{juegoNuevo};
-    
+   
+
+    public enum Eventos {
+        juegoNuevo
+    };
+
     public static Sistema getInstancia() {
         return instancia;
     }
@@ -56,11 +59,14 @@ public class Sistema extends Observable {
         return sJuegos.agregar(j);
     }
 
-    
-    
+    public void empezarJuego() {
+        sJuegos.empezarJuego();
+    }
+
+    public void listaEsperaLLena() {
+        sJuegos.listaEsperaLLena();
+    }
     
     
 
- 
-    
 }

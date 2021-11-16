@@ -11,7 +11,8 @@ import java.util.ArrayList;
  *
  * @author Fernando
  */
-public class Mano {
+public class Mano implements Comparable<Mano> {
+
     private ArrayList<Carta> cartas = new ArrayList();
     private Figura figura;
     private ArrayList<Carta> figuraCartas;
@@ -23,8 +24,8 @@ public class Mano {
     public ArrayList<Carta> getCartas() {
         return cartas;
     }
-    
-    public void agregar(Carta c){
+
+    public void agregar(Carta c) {
         cartas.add(c);
     }
 
@@ -47,13 +48,59 @@ public class Mano {
     public ArrayList<Carta> getFiguraCartas() {
         return figuraCartas;
     }
+    
+    public void asignarLaMasAlta(){
+        Carta max = null;
+        if(figura != null){
+            for(Carta c : cartas){
+                if(max != null && !this.figuraCartas.contains(c) && c.compareTo(max) > 0 ){
+                    max = c;
+                }else if(max == null){
+                }
+            }
+        }else{
+            for(Carta c : cartas){
+                if(max!=null && c.compareTo(max)>0){
+                    max = c;
+                }else if (max == null){
+                    max = c;
+                }
+            }
+        }
+        this.setLaMasAlta(max);
+    }
 
     public void setFiguraCartas(ArrayList<Carta> figuraCartas) {
         this.figuraCartas = figuraCartas;
     }
+    //Contingencia para retorno nulo?
+    public Valor valorCartaFigura(){
+        Carta c = this.getFiguraCartas().get(0);
+        return c.getValor();
+    }
+    //Contingencia para retorno nulo?
+    public Palo paloCartasColor(){
+        Carta c = this.getFiguraCartas().get(0);
+        return c.getPalo();
+    }
     
     
-    
-    
-    
+    //MEODO AL QUE LE PASO 2 MANOS PARA COMPRAR DESEMPATE
+    //PUEDO AGREGAR MAS FIGURAS SIN CAMBIAR CODIGO PERO PARA DESEMPATES PRECISO DETALLARLOS 
+    @Override
+    public int compareTo(Mano m) {
+        int ret = this.getFigura().compareTo(m.getFigura());
+        if (ret == 0) {
+           if(this.getFigura().getNombre()=="par"){
+               ret = this.getLaMasAlta().compareTo(m.getLaMasAlta());
+           }
+           if(this.getFigura().getNombre()=="pierna"){
+               ret = this.valorCartaFigura().compareTo(m.valorCartaFigura());
+           }
+           if(this.getFigura().getNombre()=="color"){
+               ret = this.paloCartasColor().compareTo(m.paloCartasColor());
+           }
+        }
+        return ret;
+    }
 }

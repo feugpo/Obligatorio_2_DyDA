@@ -19,12 +19,23 @@ public abstract class Figura implements Comparable<Figura>{
         this.nombre = nombre;
         this.puntaje = puntaje;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+    
+    
     
     public abstract void evaluar(Mano mano);
 
     @Override
     public int compareTo(Figura f) {
         int ret = Integer.compare(f.puntaje, this.puntaje);
+        //DESEMPAAR 
         return ret;
     }
     
