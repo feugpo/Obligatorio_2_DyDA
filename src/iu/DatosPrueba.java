@@ -35,7 +35,7 @@ public class DatosPrueba {
         //luz
         int luz = 5;
         //numero participantes por juego
-        int participantes = 3;
+        int participantes = 2;
         //figuras posibles
         ArrayList<Figura> figuras = new ArrayList();
         Par par = new Par("par", 1);

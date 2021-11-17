@@ -12,6 +12,7 @@ import logica.Juego;
 import logica.Participante;
 import javax.swing.*;
 
+
 /**
  *
  * @author Gabriel
@@ -26,8 +27,9 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     public PartidaPoker(java.awt.Frame parent, boolean modal, Juego juego, Participante participante) {
         super(parent, modal);
         initComponents();
+        inhabilitarBotones();
         this.ctrlPoker = new ControladorPartidaPoker(this, juego, participante);
-        
+
     }
 
     /**
@@ -49,11 +51,15 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         jBtnPasar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMensaje.setText("ESPERANDO PARA EMPEZAR");
 
-        jCarta1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
         jCarta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCarta1ActionPerformed(evt);
@@ -65,18 +71,11 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
             }
         });
 
-        jCarta2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
         jCarta2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCarta2ActionPerformed(evt);
             }
         });
-
-        jCarta3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
-
-        jCarta4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
-
-        jCarta5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel\\Documents\\NetBeansProjects\\cartas\\Invertida.gif")); // NOI18N
 
         jBtnApostar.setText("APOSTAR");
         jBtnApostar.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +85,11 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         });
 
         jBtnPasar.setText("PASAR");
+        jBtnPasar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPasarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,6 +97,11 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(jBtnApostar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(jBtnPasar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -106,12 +115,7 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
                                 .addGap(18, 18, 18)
                                 .addComponent(jCarta4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCarta5, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(286, 286, 286)
-                        .addComponent(jBtnApostar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jBtnPasar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jCarta5, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,13 +128,13 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
                     .addComponent(jCarta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCarta4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCarta5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                 .addComponent(jMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBtnApostar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnApostar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnPasar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(49, 49, 49))
         );
 
         pack();
@@ -145,13 +149,26 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }//GEN-LAST:event_jCarta2ActionPerformed
 
     private void jBtnApostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnApostarActionPerformed
-        int respuesta = Integer.parseInt(JOptionPane.showInputDialog(this, "Cuanto apuesta?", "Ingresar apuesta", -1));
-        ctrlPoker.apostar(respuesta);
+        String respuesta = JOptionPane.showInputDialog(this, "Cuanto apuesta?", "Ingresar apuesta", -1);
+        if(respuesta!=null){
+            int iRes = Integer.parseInt(respuesta);
+            System.out.println(respuesta);
+            ctrlPoker.apostar(iRes);
+        }
+        
     }//GEN-LAST:event_jBtnApostarActionPerformed
 
     private void jCarta1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCarta1PropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jCarta1PropertyChange
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        ctrlPoker.salir();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jBtnPasarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPasarActionPerformed
+        ctrlPoker.pasar();
+    }//GEN-LAST:event_jBtnPasarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,33 +185,19 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     private javax.swing.JLabel jMensaje;
     // End of variables declaration//GEN-END:variables
 
+    private JButton[] crearArrayBotones() {
+        JButton[] botones = new JButton[5];
+        botones[0] = jCarta1;
+        botones[1] = jCarta2;
+        botones[2] = jCarta3;
+        botones[3] = jCarta4;
+        botones[4] = jCarta5;
+        return botones;
+    }
+
     @Override
     public void cargarVistaParticipante(Participante p) {
-        this.setTitle(p.getJugador().getNombreCompleto());
-        asignarRutaBoton(ctrlPoker.rutaCartas());
-        
-//        if (p.tieneMano()) {
-//            asignarRutaBoton(ctrlPoker.rutaCartas());
-//        }else{
-//            asignarRutaBoton(ctrlPoker.rutaCartas());
-//        }
-
     }
-
-    private void asignarRutaBoton(ArrayList<String> rutas) {
-        Icon c1 = new ImageIcon(rutas.get(0));
-        jCarta1.setIcon(c1);
-        Icon c2 = new ImageIcon(rutas.get(1));
-        jCarta2.setIcon(c2);
-        Icon c3 = new ImageIcon(rutas.get(2));
-        jCarta3.setIcon(c3);
-        Icon c4 = new ImageIcon(rutas.get(3));
-        jCarta4.setIcon(c4);
-        Icon c5 = new ImageIcon(rutas.get(4));
-        jCarta5.setIcon(c5);
-    }
-    
-    
 
     @Override
     public void alertarApuesta() {
@@ -208,6 +211,66 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         }
     }
 
+    @Override
+    public void mostrarTitulo(String nombreCompleto) {
+        this.setTitle(nombreCompleto);
+    }
+
+    @Override
+    public void mostrarCartas(ArrayList<String> cartas) {
+        if (cartas != null) {
+            asignarRutaBoton(cartas);
+        } else {
+            JButton[] botones = crearArrayBotones();
+            for (JButton b : botones) {
+                String imagenDefault = "cartas\\Invertida.gif";
+                Icon imagen = new ImageIcon(imagenDefault);
+                b.setIcon(imagen);
+            }
+        }
+    }
+
+    private void asignarRutaBoton(ArrayList<String> cartas) {
+        JButton[] botones = crearArrayBotones();
+        for (int x = 0; x < 5; x++) {
+            Icon imagen = new ImageIcon(crearRutaImagen(cartas.get(x)));
+            botones[x].setIcon(imagen);
+        }
+    }
+
+    private String crearRutaImagen(String nombreCarta) {
+        return "cartas\\" + nombreCarta + ".gif";
+    }
+
+    @Override
+    public void mensajeListaEspera(int faltantes) {
+        jMensaje.setText("Esperando inicio del juego, faltan: " + faltantes);
+    }
+
+    @Override
+    public void mensajeMano(String nomFigura, String cartaAlta) {
+        if(nomFigura!=null){
+            jMensaje.setText("Tienes figura: " + nomFigura);
+        }else{
+            jMensaje.setText("No tienes figura y tu carta más alta es: " + cartaAlta);
+        }
+    }
+
+    @Override
+    public void habilitarBotones() {
+        jBtnApostar.setEnabled(true); 
+        jBtnPasar.setEnabled(true); 
+    }
     
+    @Override
+    public void inhabilitarBotones(){
+        jBtnApostar.setEnabled(false); 
+        jBtnPasar.setEnabled(false); 
+    }
+
+    @Override
+    public void vaciarMensaje() {
+        jMensaje.setText("");
+    }
 
 }

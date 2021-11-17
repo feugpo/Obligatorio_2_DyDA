@@ -21,11 +21,8 @@ public class Carta implements Comparable<Carta> {
     }
 
     public String generarString() {
-        //MOVER CARPETA CARTAS PARA ADENTRO DEL PROJECT Y USAR "./IMAGENES"
-        return System.getProperty("user.dir")+"\\..\\cartas\\"+valor.getValor()+palo.getPalo()+".gif";
+        return valor.getValor()+palo.getPalo();
     }
-
-   
 
     public Palo getPalo() {
         return palo;

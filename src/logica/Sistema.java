@@ -21,7 +21,8 @@ public class Sistema extends Observable {
    
 
     public enum Eventos {
-        juegoNuevo
+        juegoNuevo,
+        modificoListaEspera
     };
 
     public static Sistema getInstancia() {
@@ -63,8 +64,12 @@ public class Sistema extends Observable {
         sJuegos.empezarJuego();
     }
 
-    public void listaEsperaLLena() {
-        sJuegos.listaEsperaLLena();
+    public boolean listaEsperaLLena() {
+        return sJuegos.listaEsperaLLena();
+    }
+
+    public int participantesFaltantes() {
+        return sJuegos.participantesFaltantes();
     }
     
     

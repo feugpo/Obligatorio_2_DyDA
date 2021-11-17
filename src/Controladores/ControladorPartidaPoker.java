@@ -11,7 +11,6 @@ import Vistas.VistaPartidaPoker;
 import java.util.ArrayList;
 import logica.Juego;
 import logica.Participante;
-import logica.Ronda;
 import logica.Sistema;
 
 /**
@@ -31,42 +30,40 @@ public class ControladorPartidaPoker implements Observador {
         this.juego = juego;
         fachada.agregar(this);
         juego.agregar(this);
-        //LLEVAR ESTOS 2 ULTIMOS PARA EL CONTROLADOR
-        vista.cargarVistaParticipante(participante);
-        listaEsperaLLena();
-        //
+        cargarDatosIniciales();
+        this.vista.inhabilitarBotones();
+        mostrarMensajeListaEspera();
     }
 
     @Override
     public void actualizar(Object evento, Observable origen) {
+        if(evento.equals(Sistema.Eventos.modificoListaEspera)){
+            mostrarMensajeListaEspera();
+        }
         if (evento.equals(Sistema.Eventos.juegoNuevo)) {
             fachada.empezarJuego();
+            vista.mostrarCartas(traerNombresCartas());
         }
         if (evento.equals(Juego.Eventos.rondaNueva)) {
-            vista.cargarVistaParticipante(participante);
-            juego.getRondaActual().agregar(this);//Esto se debe hacer acá? //Agregar observador a la lista del observado
+            cargarDatosIniciales();
+            mostrarMensajeMano();
+            vista.habilitarBotones();
         }
-        if (evento.equals(Ronda.Eventos.apuestaNueva)) {
+        if (evento.equals(Juego.Eventos.apuestaNueva)) {
             if (juego.getRondaActual().getPasadores().contains(participante)) {
                 vista.cargarVistaParticipante(participante);
                 vista.alertarApuesta();
             }
-            
-
         }
-    }
+    }    
 
-    public ArrayList<String> rutaCartas() {
-        return participante.generarUrlCarta();
+    public boolean listaEsperaLLena() {
+        return fachada.listaEsperaLLena();
     }
-
+    
     public void apostar(int apuesta) {
-        //juego.apostar(participante, apuesta); CAMBIAR EL EVENTO EN JUEGO VA A LLAMAR A RONDA 
-        juego.getRondaActual().apostar(participante, apuesta);
-    }
-
-    public void listaEsperaLLena() {
-        fachada.listaEsperaLLena();
+        juego.apostar(participante, apuesta); //CAMBIAR EL EVENTO EN JUEGO VA A LLAMAR A RONDA 
+        vista.inhabilitarBotones();
     }
 
     public void aceptarApuesta() {
@@ -74,7 +71,53 @@ public class ControladorPartidaPoker implements Observador {
     }
 
     public void rechazarApuesta() {
-        juego.getRondaActual().retirarse(participante);
-        vista.cargarVistaParticipante(participante);
+        salir();
     }
+
+    private void cargarDatosIniciales() {
+        vista.mostrarTitulo(participante.getJugador().getNombreCompleto());
+        vista.mostrarCartas(traerNombresCartas());
+    }
+
+    public ArrayList<String> traerNombresCartas() {
+        if(participante.getMano()!= null){
+            return participante.getMano().generarNombreCartas();
+        }
+        return null;
+    }
+
+    private void mostrarMensajeListaEspera() {
+        if(!listaEsperaLLena()){
+            int faltantes = fachada.participantesFaltantes();
+            vista.mensajeListaEspera(faltantes);
+        }
+    }
+
+    private void mostrarMensajeMano() {
+        String nomFigura = participante.getMano().getnombreFigura();  
+        String cartaAlta = participante.getMano().getNombreCartaAlta();
+        //participante.getMano().generarReporteMano();
+        vista.mensajeMano(nomFigura, cartaAlta);
+        
+        
+    }
+
+    public void salir() {
+        if(juego.getRondaActual()!=null){
+            juego.getRondaActual().retirarse(participante);
+            vista.mostrarCartas(traerNombresCartas());
+            vista.inhabilitarBotones();
+            vista.vaciarMensaje();
+        }else{
+            juego.retirarse(participante);
+        }
+    }
+
+    public void pasar() {
+        boolean pasaronTodos = juego.getRondaActual().pasar(participante);
+        if(pasaronTodos){
+            juego.crearRondaPasadores();
+        }
+    }
+
 }

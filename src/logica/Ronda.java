@@ -20,12 +20,11 @@ public class Ronda extends Observable {
     //private Participante ganador;
     private Mazo mazo;
     private Pozo pozo;
-    
-    //LLEVAR EVENTOS AL JUEGO 
-    public enum Eventos {
-        apuestaNueva, hayGanador
-    };
 
+    //LLEVAR EVENTOS AL JUEGO 
+//    public enum Eventos {
+//        apuestaNueva, hayGanador
+//    };
     public Ronda(ArrayList<Participante> p) {
         this.mazo = new Mazo();
         this.pozo = new Pozo();
@@ -36,16 +35,23 @@ public class Ronda extends Observable {
         evaluarManos();
     }
 
+    public Pozo getPozo() {
+        return pozo;
+    }
+
+    
+    
     public ArrayList<Participante> getPasadores() {
         return pasadores;
     }
-    
-    
 
     public Ronda(ArrayList<Participante> pptes, Pozo pozo) {
         this.mazo = new Mazo();
         this.pozo = pozo;
         this.participantes = pptes;
+        cobrarLuz();
+        repartir(); //esto es correcto?
+        evaluarManos();
     }
 
     public void agregar(Participante p) {
@@ -73,6 +79,7 @@ public class Ronda extends Observable {
             for (Figura f : listaFiguras) {
                 f.evaluar(p.getMano());
             }
+            p.getMano().asignarLaMasAlta();
         }
     }
 
@@ -83,15 +90,17 @@ public class Ronda extends Observable {
         }
     }
 
-    public void pasar(Participante p) {
+    public boolean pasar(Participante p) {
         participantes.remove(p);
         pasadores.add(p);
+        return pasaronTodos();
     }
 
     //ESTA ES PARA CUANDO LA PERSONA SE VA CERRANDO EL JUEGO // O SE VA DE LA RONDA POR AHORA
     public void retirarse(Participante p) {
         participantes.remove(p);
         pasadores.remove(p);
+        p.vaciarMano();
     }
 
     //PENSAR COMO UNO LARGA EVENTO Y EL OTRO NO (LUZ VS APUESTA)
@@ -102,24 +111,23 @@ public class Ronda extends Observable {
         //pasamos todos menos el apostador a la lista de pasadores
         ArrayList<Participante> aux = new ArrayList();
         for (Participante parti : participantes) {
-            
+
             if (parti != p) {
                 aux.add(parti);
             }
         }
-        for (Participante parti1 : aux){
+        for (Participante parti1 : aux) {
             pasar(parti1);
         }
-        avisar(Eventos.apuestaNueva);
+        //avisar(Eventos.apuestaNueva);
     }
-    
+
     //AGREGAR LOGICA SI PASADORES == VACIO AL FINAL => SELECCIONAR UN GANADOR????
-    public void aceptarApuesta(Participante p){
+    public void aceptarApuesta(Participante p) {
         cobrarMontoLuzApuesta(p, apuesta);
         pasadores.remove(p);
         participantes.add(p);
     }
-    
 
     public void cobrarMontoLuzApuesta(Participante p, int monto) {
         p.getJugador().pagar(monto);
@@ -127,5 +135,8 @@ public class Ronda extends Observable {
         pozo.agregar(monto);
     }
 
-    
+    private boolean pasaronTodos() {
+        return participantes.size() == 0;
+    }
+
 }

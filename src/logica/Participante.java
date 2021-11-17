@@ -71,25 +71,12 @@ public class Participante {
         return saldoInicial;
     }
 
-    public ArrayList<String> generarUrlCarta() {
-        ArrayList<String> retorno = new ArrayList();
-        if (mano.getCartas() != null) {
-            for (Carta c : mano.getCartas()) {
-                retorno.add(c.generarString());
-            }
-        }
-//        else{
-//            int i = 0;
-//            while(i<5){
-//                retorno.add(System.getProperty("user.dir")+"\\..\\cartas\\Invertida.gif");
-//            }
-//        }
-
-        return retorno;
-    }
-
     public boolean tieneMano() {
         return getMano() != null;
+    }
+
+    void vaciarMano() {
+        this.mano = null;
     }
     
     

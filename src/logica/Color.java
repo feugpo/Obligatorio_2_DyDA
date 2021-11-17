@@ -37,6 +37,14 @@ public class Color extends Figura {
             }
         }
     }
+
+    @Override
+    public Participante desempatar(Participante p1, Participante p2) {
+        if(p1.getMano().paloCartasColor().compareTo(p2.getMano().paloCartasColor()) > 0){
+            return p1;
+        } 
+        return p2;
+    }
     
 
 }

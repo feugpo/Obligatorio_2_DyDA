@@ -34,10 +34,12 @@ public abstract class Figura implements Comparable<Figura>{
 
     @Override
     public int compareTo(Figura f) {
-        int ret = Integer.compare(f.puntaje, this.puntaje);
+        int ret = Integer.compare(this.puntaje, f.puntaje);
         //DESEMPAAR 
         return ret;
     }
+    
+    public abstract Participante desempatar(Participante p1, Participante p2);
     
     
     

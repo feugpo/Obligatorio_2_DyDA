@@ -56,6 +56,7 @@ public class Mano implements Comparable<Mano> {
                 if(max != null && !this.figuraCartas.contains(c) && c.compareTo(max) > 0 ){
                     max = c;
                 }else if(max == null){
+                    
                 }
             }
         }else{
@@ -84,23 +85,31 @@ public class Mano implements Comparable<Mano> {
         return c.getPalo();
     }
     
-    
-    //MEODO AL QUE LE PASO 2 MANOS PARA COMPRAR DESEMPATE
-    //PUEDO AGREGAR MAS FIGURAS SIN CAMBIAR CODIGO PERO PARA DESEMPATES PRECISO DETALLARLOS 
     @Override
     public int compareTo(Mano m) {
         int ret = this.getFigura().compareTo(m.getFigura());
-        if (ret == 0) {
-           if(this.getFigura().getNombre()=="par"){
-               ret = this.getLaMasAlta().compareTo(m.getLaMasAlta());
-           }
-           if(this.getFigura().getNombre()=="pierna"){
-               ret = this.valorCartaFigura().compareTo(m.valorCartaFigura());
-           }
-           if(this.getFigura().getNombre()=="color"){
-               ret = this.paloCartasColor().compareTo(m.paloCartasColor());
-           }
-        }
         return ret;
+    }
+
+    public ArrayList<String> generarNombreCartas() {
+        ArrayList<String> nombres = new ArrayList(); 
+        for(Carta c : cartas){
+            nombres.add(c.generarString());
+        }
+        return nombres;
+    }
+
+    public String getnombreFigura() {
+        if(figura != null){
+            return figura.getNombre();                 
+        }
+        return null;
+    }
+
+    public String getNombreCartaAlta() {
+        if(laMasAlta != null){
+            return laMasAlta.generarString();
+        }
+        return null;
     }
 }
