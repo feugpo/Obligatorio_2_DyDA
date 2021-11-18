@@ -77,6 +77,12 @@ public class Sistema extends Observable {
     public void salirListaEspera(Participante p) {
         sJuegos.salirListaEspera(p);
     }
+
+    public ArrayList<Juego> juegosEnProgreso() {
+        return sJuegos.juegosEnProgreso();
+    }
+    
+    
     
     
     

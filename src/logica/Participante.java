@@ -89,7 +89,7 @@ public class Participante {
 
     @Override
     public String toString() {
-        return jugador.toString();
+        return "Nombre completo: " + jugador.getNombreCompleto() + " Total Apostado: " + totalApostado + " Saldo inicial: " + saldoInicial + " Total Ganado: " + totalGanado;
     }
     
     

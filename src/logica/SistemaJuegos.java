@@ -36,7 +36,7 @@ public class SistemaJuegos {
         Participante p = new Participante(j);
         juegoEspera.agregar(p);
         //agregar un evento para se agrego una persona a lista espera
-        Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
+        //Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
         return juegoEspera;
     }
 
@@ -67,6 +67,16 @@ public class SistemaJuegos {
     
     public void salirListaEspera(Participante p){
         juegoEspera.getParticipantes().remove(p);
-        Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
+        //Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
     } 
+    
+    public ArrayList<Juego> juegosEnProgreso(){
+        ArrayList<Juego> ret = new ArrayList();
+        for(Juego j : juegos){
+            if(j.getGanador() == null){
+                ret.add(j);
+            }
+        }
+        return ret;
+    }
 }

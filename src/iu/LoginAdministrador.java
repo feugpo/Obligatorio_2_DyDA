@@ -27,7 +27,7 @@ public class LoginAdministrador extends LoginGenerico {
 
     @Override
     public void pantallaSiguiente(Object usu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new MonitoreoJuegos(null, false, (Administrador)usu).setVisible(true);
     }
     
 }

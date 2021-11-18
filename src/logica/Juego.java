@@ -23,17 +23,22 @@ public class Juego extends Observable {
     private Ronda rondaActual;
     private Date fecha;
 
+    
     public enum Eventos {
         rondaNueva, apuestaNueva, ganadorJuego, continuar, ganadorRonda, retiroJugador
     };
 
+    public Juego() {
+    }
+    
     public Ronda getRondaActual() {
         return rondaActual;
     }
 
-    public Juego() {
+    public Participante getGanador() {
+        return ganador;
     }
-
+    
     public void agregar(Participante p) {
         participantes.add(p);
     }
@@ -60,6 +65,7 @@ public class Juego extends Observable {
         }
         if (participantes.size() == 1 && rondaActual != null) {
             //premiar al ganador en la ronda si es que hay sino solo felicitarlo
+            this.ganador = participantes.get(0);
             avisar(Eventos.ganadorJuego);
         }
     }
@@ -130,5 +136,34 @@ public class Juego extends Observable {
     public boolean seEncuentra(Participante participante) {
         return participantes.contains(participante);
     }
+    
+    private int totalApostado(){
+        int ret = 0;
+        for(Participante p : participantesHistoria()){
+            ret += p.getTotalApostado();
+        }
+        return ret;
+    }
+    
+    public ArrayList<Participante> participantesHistoria() {
+        ArrayList<Participante> ret = new ArrayList();
+        for(Participante p1 : participantes){
+            ret.add(p1);
+        }
+        for(Participante p2 : retirados){
+            ret.add(p2);
+        }
+        return ret;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Fecha inicio: " + fecha + " Participantes: " + (participantes.size() + retirados.size()) + " Rondas jugadas: " + rondas + " Total apostado: " + totalApostado();
+    }
+    
+    
+    
+    
 
 }

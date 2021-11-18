@@ -254,7 +254,7 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     @Override
     public void alertarApuesta(String apostador, int monto) {
         inhabilitarBotones();
-        String mensaje = apostador + "ha apostado " + monto + " ¿quieres igualar?";
+        String mensaje = apostador + " ha apostado " + monto + " ¿quieres igualar?";
         int respuesta = JOptionPane.showOptionDialog(this, mensaje, "Nueva Apuesta", -1, JOptionPane.OK_CANCEL_OPTION, null, new String[]{"Aceptar", "Retirarse"}, "default");
         if (respuesta == 0) {
             //acepta
