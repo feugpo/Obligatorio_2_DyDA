@@ -26,18 +26,14 @@ public class SistemaJuegos {
     }
 
     public void crearConfiguracion(int luz, int participantes, ArrayList<Figura> figuras, ArrayList<Valor> valores, ArrayList<Palo> palos) {
-        this.configuracion = new Configuracion(luz, participantes, figuras, valores, palos);
-        //this.configuracion.setLuz(luz);
-        //this.configuracion.setparticipantes(participantes);
+        this.configuracion = new Configuracion(luz, participantes, figuras, valores, palos); 
     }
 
-    //llamar desde sistema usuario a traves de la fachada
     public Juego agregar(Jugador j) throws PokerException{
         if(juegoEspera.buscar(j)!=null)throw new PokerException("Ya estas en la lista de espera");
         if(!j.saldoSuficiente(configuracion.getLuz(), configuracion.getParticipantes()))throw new PokerException("No tienes el saldo suficiente para participar");
         Participante p = new Participante(j);
         juegoEspera.agregar(p); 
-        //agregar un evento para se agrego una persona a lista espera  
         return juegoEspera;
     }
 

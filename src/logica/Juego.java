@@ -24,8 +24,8 @@ public class Juego extends Observable {
     private Date fecha;
 
     public Participante apostador() {
-        
-        return this.getRondaActual().agarrarPrimero();    
+
+        return this.getRondaActual().agarrarPrimero();
     }
 
     public enum Eventos {
@@ -76,13 +76,25 @@ public class Juego extends Observable {
     }
 
     public void retirarseRonda(Participante p) {
-        if (rondaActual.retirarse(p)) {
+        rondaActual.retirarse(p);
+        avisar(Eventos.retiroJugador);
+        if (rondaActual.hayGanadorRondaPorDefecto()) {
             avisar(Eventos.ganadorRonda);
-        } else {
-            avisar(Eventos.retiroJugador);
+            avisar(Eventos.continuar);
+        }else if(rondaActual.noHayParticipantes()){
+            avisar(Eventos.continuar);
         }
     }
-
+    
+    public void aceptarApuesta(Participante participante) {
+        rondaActual.aceptarApuesta(participante);
+        if(rondaActual.noHayPasadores()){
+            rondaActual.seleccionarGanadorRonda();
+            avisar(Eventos.ganadorRonda);
+            avisar(Eventos.continuar);
+        }
+    }
+    
     public boolean lleno(int maximo) {
         return participantes.size() == maximo;
     }
@@ -92,7 +104,6 @@ public class Juego extends Observable {
         for (Participante p : participantes) {
             p.iniciarSaldo();
         }
-
     }
 
     public ArrayList<Participante> getParticipantes() {
@@ -114,7 +125,8 @@ public class Juego extends Observable {
     }
 
     public void pasar(Participante p) {
-        if (rondaActual.pasar(p)) {
+        rondaActual.pasar(p);
+        if (rondaActual.noHayParticipantes()) {
             avisar(Eventos.continuar);
         }
     }
@@ -131,12 +143,7 @@ public class Juego extends Observable {
         }
     }
 
-    public void seleccionarGanadorRonda() {
-        rondaActual.seleccionarGanadorRonda();
-        avisar(Eventos.ganadorRonda);
-        avisar(Eventos.continuar);
-        //crearRonda();
-    }
+    
 
     public boolean seEncuentra(Participante participante) {
         return participantes.contains(participante);
@@ -162,7 +169,7 @@ public class Juego extends Observable {
     }
 
     public boolean tiene(Participante participante) {
-        return this.getRondaActual().getPasadores().contains(participante);
+        return this.getRondaActual().esPasador(participante);    
     }
 
     @Override

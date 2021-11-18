@@ -53,10 +53,12 @@ public class Mano implements Comparable<Mano> {
         Carta max = null;
         if (figura != null) {
             for (Carta c : cartas) {
+                //si max no es null => agarro la carta mas alta fuera de la figura q sea mayor que max
                 if (max != null && !this.figuraCartas.contains(c) && c.compareTo(max) > 0) {
                     max = c;
                 } else if (max == null) {
-
+                    //si max es null me guardo la primer carta
+                    max = c;
                 }
             }
         } else {
@@ -71,13 +73,11 @@ public class Mano implements Comparable<Mano> {
         this.setLaMasAlta(max);
     }
 
-    //Contingencia para retorno nulo?
     public Valor valorCartaFigura() {
         Carta c = this.getFiguraCartas().get(0);
         return c.getValor();
     }
-
-    //Contingencia para retorno nulo?
+    
     public Palo paloCartasColor() {
         Carta c = this.getFiguraCartas().get(0);
         return c.getPalo();

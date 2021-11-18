@@ -151,22 +151,25 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jCarta1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCarta2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCarta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCarta4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCarta5))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jSaldo))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPozo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jSaldo))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jPozo)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jCarta5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCarta4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCarta3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCarta2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCarta1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -187,7 +190,7 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }//GEN-LAST:event_jCarta2ActionPerformed
 
     private void jBtnApostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnApostarActionPerformed
-        String respuesta = JOptionPane.showInputDialog(this, "Cuanto apuesta?", "Ingresar apuesta", -1);
+        String respuesta = JOptionPane.showInputDialog(this, "¿Cuanto apuesta?", "Ingresar apuesta", -1);
         if(respuesta!=null){
             ctrlPoker.apostar(respuesta);
         }
@@ -270,7 +273,7 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         } else {
             JButton[] botones = crearArrayBotones();
             for (JButton b : botones) {
-                String imagenDefault = "cartas\\Invertida.gif";
+                String imagenDefault = "..\\cartas\\Invertida.gif";
                 Icon imagen = new ImageIcon(imagenDefault);
                 b.setIcon(imagen);
             }
@@ -286,7 +289,7 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }
 
     private String crearRutaImagen(String nombreCarta) {
-        return "cartas\\" + nombreCarta + ".gif";
+        return "..\\cartas\\" + nombreCarta + ".gif";
     }
 
     @Override
@@ -345,7 +348,6 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         this.dispose();
     }
 
- 
     @Override
     public void informarSobreGanadorRonda(String nombreUsu, String figura) {
         String mensaje = "El ganador/a es " + nombreUsu + " con " + figura + "!"; 
@@ -364,9 +366,9 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
 
     @Override
     public void avisarGanadorJuego(String nombreUsu) {
-        String mensaje = "Felicitaciones " + nombreUsu + "eres el ganador!!!";
+        String mensaje = "Felicitaciones " + nombreUsu + " eres el ganador!!!";
         JOptionPane.showMessageDialog(this, mensaje, "", -1, null);
-        //ctrlPoker.salirJuego();
+        ctrlPoker.salirJuego();
     }
 
   

@@ -18,7 +18,6 @@ public class Valor implements Comparable<Valor> {
         this.puntaje = puntaje;
     }
 
-
     public String getValor() {
         return valor;
     }

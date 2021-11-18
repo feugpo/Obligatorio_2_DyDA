@@ -26,7 +26,7 @@ public class DatosPrueba {
         sistema.agregarJugador("Maria", "123", "Maria Gomez", 120);
         sistema.agregarJugador("Juan", "123", "Juan Cruz", 80);
         sistema.agregarJugador("Nicolas", "123", "Nicolas Barreiro", 80);
-        sistema.agregarJugador("Ana", "123", "Ana Maria",60);
+        sistema.agregarJugador("Ana", "123", "Ana Maria",10);
         sistema.agregarJugador("Pedro", "123", "Pedro FlintStone", 120);
         //ADMINISTRADORES
         sistema.agregarUsuarioAdmin("Gabriel", "123", "Gabriel Abelenda");

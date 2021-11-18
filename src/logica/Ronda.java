@@ -29,15 +29,13 @@ public class Ronda {
         }
         //para mi ronda nueva preciso cobrar la luz, barajar, repartir, y ya saber que mano tengo para mostrar los datos
         cobrarLuz();
-        repartir(); //esto es correcto?
+        repartir();
         evaluarManos();
     }
 
     public int getApuesta() {
         return apuesta;
     }
-    
-    
 
     public Participante getGanador() {
         return ganador;
@@ -85,6 +83,7 @@ public class Ronda {
     }
 
     //Luego de repartir asigna la figura si tiene y la carta mas alta si corresponde 
+    //NO COMPARA CON OTROS PARTICPANTES - asigna que figura y carta mas alta tengo
     public void evaluarManos() {
         for (Participante p : participantes) {
             ArrayList<Figura> listaFiguras = Sistema.getInstancia().getConfiguracion().getFiguras();
@@ -102,21 +101,20 @@ public class Ronda {
         }
     }
 
-    public boolean pasar(Participante p) {
+    public void pasar(Participante p) {
         participantes.remove(p);
         pasadores.add(p);
-        return pasaronTodos();
     }
 
-    private boolean pasaronTodos() {
+    public boolean noHayParticipantes() {
         return participantes.isEmpty();
     }
-
-    public boolean retirarse(Participante p) {
+//CAMBIE A VOID
+    public void retirarse(Participante p) {
         participantes.remove(p);
         pasadores.remove(p);
         p.vaciarMano();
-        return hayGanadorRondaPorDefecto();
+        //return hayGanadorRondaPorDefecto();
     }
 
     public void apostar(Participante p, int monto) {
@@ -135,14 +133,19 @@ public class Ronda {
         }
     }
 
-    //AGREGAR LOGICA SI PASADORES == VACIO AL FINAL => SELECCIONAR UN GANADOR????
-    public boolean aceptarApuesta(Participante p) {
+    public void aceptarApuesta(Participante p) {
         cobrarMontoLuzApuesta(p, apuesta);
         pasadores.remove(p);
         participantes.add(p);
+//        if(noHayPasadores()){
+//            seleccionarGanadorRonda();
+//        }
+    }
+    
+    public boolean noHayPasadores(){
         return pasadores.isEmpty();
     }
-
+    
     public void cobrarMontoLuzApuesta(Participante p, int monto) {
         p.getJugador().pagar(monto);
         p.sumarApostado(monto);
@@ -153,7 +156,16 @@ public class Ronda {
     public boolean seEncuentra(Participante participante) {
         return participantes.contains(participante) || pasadores.contains(participante);
     }
+    
+    public Participante agarrarPrimero() {
+        return participantes.get(0);
+    }
 
+    boolean esPasador(Participante participante) {
+        return pasadores.contains(participante);
+    }
+
+    //Cuando todos menos uno abandonan la ronda
     public boolean hayGanadorRondaPorDefecto() {
         boolean ret = participantes.size() + pasadores.size() == 1;
         if (ret) {
@@ -177,10 +189,6 @@ public class Ronda {
             }
         }
         pozo.premiar(ganador);
+        
     }
-
-    Participante agarrarPrimero() {
-        return participantes.get(0);
-    }
-
 }

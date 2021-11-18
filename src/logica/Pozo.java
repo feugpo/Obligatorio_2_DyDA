@@ -19,8 +19,6 @@ public class Pozo {
         return monto;
     }
     
-    
-    
     void agregar(int apuesta) {
         monto += apuesta;
     }

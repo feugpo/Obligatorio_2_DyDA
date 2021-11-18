@@ -38,7 +38,7 @@ public class ControladorPartidaPoker implements Observador {
     @Override
     public void actualizar(Object evento, Observable origen) {
         if (evento.equals(Sistema.Eventos.modificoListaEspera)) {
-            if(juego != null){
+            if (juego != null) {
                 mostrarMensajeListaEspera();
                 mostrarJugadores();
             }
@@ -50,56 +50,61 @@ public class ControladorPartidaPoker implements Observador {
             vista.habilitarBotones();
         }
         if (evento.equals(Juego.Eventos.apuestaNueva)) {
-            if (juego.tiene(participante)) {    
+            if (juego.tiene(participante)) {
                 Participante apostador = juego.apostador();
                 String nombre = apostador.nombreUsu();
                 vista.alertarApuesta(nombre, juego.getRondaActual().getApuesta());
             }
         }
         if (evento.equals(Juego.Eventos.retiroJugador)) {
-            mostrarJugadores();
+            vista.mostrarCartas(traerNombresCartas());
         }
         if (evento.equals(Juego.Eventos.ganadorRonda)) {
             if (juego.getRondaActual().seEncuentra(participante)) {
                 informarDeGanador();
             }
+            vista.habilitarBotones();
         }
         if (evento.equals(Juego.Eventos.continuar)) {
             boolean puede = fachada.saldoSuficiente(participante.getJugador().getSaldo());
-            if (puede) {
-                if (juego.seEncuentra(participante)) {
-                    vista.consultarSiContinua();
-                }
-            } else {
-                juego.getRondaActual().retirarse(participante);
-                vista.avisarNoContinua();
+            if (juego.getParticipantes().size() > 1) {
+                if (puede) {
+                    if (juego.seEncuentra(participante)) {
+                        vista.consultarSiContinua();
+                    }
+                } else {
+                    juego.getRondaActual().retirarse(participante);
+                    vista.avisarNoContinua();
 
+                }
             }
+
         }
         if (evento.equals(Juego.Eventos.ganadorJuego)) {
             vista.avisarGanadorJuego(participante.nombreUsu());
         }
-        
 
     }
-
-    
 
     public void apostar(String apuesta) {
         int iRes = Integer.parseInt(apuesta);
         vista.inhabilitarBotones();
-        juego.apostar(participante, iRes); 
+        juego.apostar(participante, iRes);
 
     }
 
     public void aceptarApuesta() {
-        if (juego.getRondaActual().aceptarApuesta(participante)) {
-            juego.seleccionarGanadorRonda();
-        }
+        juego.aceptarApuesta(participante);
+//        if (juego.getRondaActual().noHayPasadores()) {
+//            juego.seleccionarGanadorRonda();
+//        }
     }
 
     public void rechazarApuesta() {
         salirRonda();
+//        if (juego.getRondaActual().noHayPasadores()) {
+//            juego.seleccionarGanadorRonda();
+//        }
     }
 
     private void cargarDatosIniciales() {
@@ -121,7 +126,7 @@ public class ControladorPartidaPoker implements Observador {
             vista.mensajeListaEspera(faltantes);
         }
     }
-    
+
     public boolean listaEsperaLLena() {
         return fachada.listaEsperaLLena();
     }
@@ -135,20 +140,19 @@ public class ControladorPartidaPoker implements Observador {
     }
 
     public void salirRonda() {
-        juego.retirarseRonda(participante);
         vista.inhabilitarBotones();
         vista.vaciarMensaje();
+        juego.retirarseRonda(participante);
     }
 
     public void salirJuego() {
-        if(juego.getRondaActual()!=null){
+        if (juego.getRondaActual() != null) {
             juego.quitar(this);
             juego.retirarseJuego(participante);
             vista.cerrarVista();
-        }else{
+        } else {
             Sistema.getInstancia().salirListaEspera(participante);
         }
-        
     }
 
     public void pasar() {
@@ -167,12 +171,17 @@ public class ControladorPartidaPoker implements Observador {
         } else {
             vista.informarSobreGanadorRonda(ganador.nombreUsu(), ganador.getMano().getLaMasAlta().generarString());
         }
+//        if (juego.getRondaActual().getParticipantes().size() > 1) {
+//            
+//        }else{
+//            vista.informarSobreGanadorRonda(ganador.nombreUsu(), "Los demas participantes se han retirado, Felicidades, eres el ganador!");
+//        }
 
     }
 
     private void mostrarJugadores() {
         ArrayList<String> aux = new ArrayList();
-        for(Participante p : juego.getParticipantes()){
+        for (Participante p : juego.getParticipantes()) {
             aux.add(p.nombreUsu());
         }
         vista.mostrarJugadores(aux);
