@@ -38,12 +38,10 @@ public class ControladorPartidaPoker implements Observador {
     @Override
     public void actualizar(Object evento, Observable origen) {
         if (evento.equals(Sistema.Eventos.modificoListaEspera)) {
-            mostrarMensajeListaEspera();
-            mostrarMensajeMano();
-        }
-        if (evento.equals(Sistema.Eventos.juegoNuevo)) {
-            fachada.empezarJuego();
-            vista.mostrarCartas(traerNombresCartas());
+            if(juego != null){
+                mostrarMensajeListaEspera();
+                mostrarJugadores();
+            }
         }
         if (evento.equals(Juego.Eventos.rondaNueva)) {
             cargarDatosIniciales();
@@ -52,9 +50,10 @@ public class ControladorPartidaPoker implements Observador {
             vista.habilitarBotones();
         }
         if (evento.equals(Juego.Eventos.apuestaNueva)) {
-            if (juego.getRondaActual().getPasadores().contains(participante)) {    //LOGICA HAY Q SACARLA
-                String apostador = juego.getRondaActual().getParticipantes().get(0).getJugador().getNombreUsuario(); //CAMBIAR POR UN METODO
-                vista.alertarApuesta(apostador, juego.getRondaActual().getApuesta());
+            if (juego.tiene(participante)) {    
+                Participante apostador = juego.apostador();
+                String nombre = apostador.nombreUsu();
+                vista.alertarApuesta(nombre, juego.getRondaActual().getApuesta());
             }
         }
         if (evento.equals(Juego.Eventos.retiroJugador)) {
@@ -80,27 +79,20 @@ public class ControladorPartidaPoker implements Observador {
         if (evento.equals(Juego.Eventos.ganadorJuego)) {
             vista.avisarGanadorJuego(participante.nombreUsu());
         }
-        if (evento.equals(Sistema.Eventos.modificoListaEspera)) {
-            if( juego!= null ){
-                mostrarJugadores();
-                mostrarMensajeListaEspera();
-            }
-        }
+        
 
     }
 
-    public boolean listaEsperaLLena() {
-        return fachada.listaEsperaLLena();
-    }
+    
 
-    public void apostar(int apuesta) {
+    public void apostar(String apuesta) {
+        int iRes = Integer.parseInt(apuesta);
         vista.inhabilitarBotones();
-        juego.apostar(participante, apuesta); //CAMBIAR EL EVENTO EN JUEGO VA A LLAMAR A RONDA 
+        juego.apostar(participante, iRes); 
 
     }
 
     public void aceptarApuesta() {
-
         if (juego.getRondaActual().aceptarApuesta(participante)) {
             juego.seleccionarGanadorRonda();
         }
@@ -114,7 +106,6 @@ public class ControladorPartidaPoker implements Observador {
         vista.mostrarDatos(participante.getJugador().getNombreCompleto(), participante.getJugador().getSaldo());
         mostrarJugadores();
         vista.mostrarCartas(traerNombresCartas());
-        vista.habilitarBotones();
     }
 
     public ArrayList<String> traerNombresCartas() {
@@ -130,16 +121,17 @@ public class ControladorPartidaPoker implements Observador {
             vista.mensajeListaEspera(faltantes);
         }
     }
+    
+    public boolean listaEsperaLLena() {
+        return fachada.listaEsperaLLena();
+    }
 
-    //CAMBIAR POR UN TRYU CATCH?? ELIMINAR LOGICA
     private void mostrarMensajeMano() {
         if (participante.getMano() != null) {
             String nomFigura = participante.getMano().getnombreFigura();
             String cartaAlta = participante.getMano().getNombreCartaAlta();
-            //participante.getMano().generarReporteMano();
             vista.mensajeMano(nomFigura, cartaAlta);
         }
-
     }
 
     public void salirRonda() {
@@ -154,7 +146,7 @@ public class ControladorPartidaPoker implements Observador {
             juego.retirarseJuego(participante);
             vista.cerrarVista();
         }else{
-            //Sistema.getInstancia().salirListaEspera(participante);
+            Sistema.getInstancia().salirListaEspera(participante);
         }
         
     }
@@ -179,7 +171,11 @@ public class ControladorPartidaPoker implements Observador {
     }
 
     private void mostrarJugadores() {
-        vista.mostrarJugadores(juego.getParticipantes());
+        ArrayList<String> aux = new ArrayList();
+        for(Participante p : juego.getParticipantes()){
+            aux.add(p.nombreUsu());
+        }
+        vista.mostrarJugadores(aux);
     }
 
     private void mostrarPozo() {

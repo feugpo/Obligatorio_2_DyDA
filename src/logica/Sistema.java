@@ -46,15 +46,15 @@ public class Sistema extends Observable {
         return sJuegos.getConfiguracion();
     }
 
-    public Jugador loginJugador(String n, String c) {
+    public Jugador loginJugador(String n, String c) throws PokerException {
         return sUsuarios.loginJugador(n, c);
     }
 
-    public Administrador loginAdmin(String n, String c) {
+    public Administrador loginAdmin(String n, String c) throws PokerException {
         return sUsuarios.loginAdmin(n, c);
     }
 
-    public Juego agregar(Jugador j) {
+    public Juego agregar(Jugador j) throws PokerException {
         return sJuegos.agregar(j);
     }
 
@@ -81,10 +81,5 @@ public class Sistema extends Observable {
     public ArrayList<Juego> juegosEnProgreso() {
         return sJuegos.juegosEnProgreso();
     }
-    
-    
-    
-    
-    
 
 }

@@ -30,12 +30,8 @@ public class Jugador extends Usuario {
         saldo -= monto;
     }
 
-    
+    public boolean saldoSuficiente(int luz, int participantes) {
+        return saldo >= (luz * participantes);
+    }
 
-    
-
-    
-    
-    
-    
 }

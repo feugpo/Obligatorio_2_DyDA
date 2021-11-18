@@ -7,6 +7,7 @@ package iu;
 
 import java.awt.Frame;
 import logica.Administrador;
+import logica.PokerException;
 import logica.Sistema;
 
 /**
@@ -14,20 +15,20 @@ import logica.Sistema;
  * @author Gabriel
  */
 public class LoginAdministrador extends LoginGenerico {
-    
+
     public LoginAdministrador(Frame parent, boolean modal) {
         super(parent, modal);
     }
-    
+
     @Override
-    public Object loginPolimorfico(String nombre, String contrasena){
-       Administrador usu=Sistema.getInstancia().loginAdmin(nombre, contrasena);
-       return usu;
+    public Object loginPolimorfico(String nombre, String contrasena) throws PokerException {
+        Administrador usu = Sistema.getInstancia().loginAdmin(nombre, contrasena);
+        return usu;
     }
 
     @Override
     public void pantallaSiguiente(Object usu) {
-        new MonitoreoJuegos(null, false, (Administrador)usu).setVisible(true);
+        new MonitoreoJuegos(null, false, (Administrador) usu).setVisible(true);
     }
-    
+
 }

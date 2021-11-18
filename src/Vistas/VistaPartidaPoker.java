@@ -42,7 +42,7 @@ public interface VistaPartidaPoker {
 
     public void informarSobreGanadorRonda(String nombreUsu, String figura);
 
-    public void mostrarJugadores(ArrayList<Participante> participantes);
+    public void mostrarJugadores(ArrayList<String> participantes);
 
     public void mostrarPozo(int monto);
 

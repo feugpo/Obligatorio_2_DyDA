@@ -54,6 +54,11 @@ public class MonitoreoJuegos extends javax.swing.JDialog implements VistaMonitor
         });
         jScrollPane1.setViewportView(jJuegos);
 
+        jJugadores.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jJugadoresValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jJugadores);
 
         jLabel1.setText("Juegos en rogreso:");
@@ -95,6 +100,10 @@ public class MonitoreoJuegos extends javax.swing.JDialog implements VistaMonitor
     private void jJuegosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jJuegosValueChanged
         seleccionJuego();
     }//GEN-LAST:event_jJuegosValueChanged
+
+    private void jJugadoresValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jJugadoresValueChanged
+        
+    }//GEN-LAST:event_jJugadoresValueChanged
 
     /**
      * @param args the command line arguments

@@ -7,6 +7,7 @@ package iu;
 
 import logica.Juego;
 import logica.Jugador;
+import logica.PokerException;
 import logica.Sistema;
 
 /**
@@ -59,6 +60,8 @@ public abstract class LoginGenerico extends javax.swing.JDialog {
             }
         });
 
+        jMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,12 +82,12 @@ public abstract class LoginGenerico extends javax.swing.JDialog {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jNombre)
-                            .addComponent(jContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
+                            .addComponent(jNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(jContrasena)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(jMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addComponent(jMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +118,6 @@ public abstract class LoginGenerico extends javax.swing.JDialog {
         login();
     }//GEN-LAST:event_jLoginActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField jContrasena;
@@ -126,22 +128,30 @@ public abstract class LoginGenerico extends javax.swing.JDialog {
     private javax.swing.JTextField jNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void login() {
-        String nombre=jNombre.getText();
-        String contrasena=new String(jContrasena.getPassword());
-        
-        Object usu=loginPolimorfico(nombre,contrasena);
-        
-        if(usu==null){
-          jMensaje.setText("Login Incorrecto");
-        }
-        else{
-          
-          pantallaSiguiente(usu);
+    private void login()  {
+        String nombre = jNombre.getText();
+        String contrasena = new String(jContrasena.getPassword());
+        try {
+            Object usu = loginPolimorfico(nombre, contrasena) ;
+            if (usu == null) {
+                jMensaje.setText("Contraseña Incorrecta");
+            } else {
+                pantallaSiguiente(usu);
+            }
+
+        } catch (PokerException ex) {   
+            jMensaje.setText(ex.getMessage());
         }
     }
 
-    public abstract Object loginPolimorfico(String nombre, String contrasena);
-    public abstract void pantallaSiguiente(Object usu);   
+    public void mostrarError(String mensaje) {
+        jMensaje.setText(mensaje);
+    }
+
+    ;
     
+    public abstract Object loginPolimorfico(String nombre, String contrasena) throws PokerException;
+
+    public abstract void pantallaSiguiente(Object usu);
+
 }

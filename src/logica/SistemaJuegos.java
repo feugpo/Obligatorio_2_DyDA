@@ -32,20 +32,21 @@ public class SistemaJuegos {
     }
 
     //llamar desde sistema usuario a traves de la fachada
-    public Juego agregar(Jugador j) {
+    public Juego agregar(Jugador j) throws PokerException{
+        if(juegoEspera.buscar(j)!=null)throw new PokerException("Ya estas en la lista de espera");
+        if(!j.saldoSuficiente(configuracion.getLuz(), configuracion.getParticipantes()))throw new PokerException("No tienes el saldo suficiente para participar");
         Participante p = new Participante(j);
-        juegoEspera.agregar(p);
-        //agregar un evento para se agrego una persona a lista espera
-        //Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
+        juegoEspera.agregar(p); 
+        //agregar un evento para se agrego una persona a lista espera  
         return juegoEspera;
     }
 
     public boolean listaEsperaLLena() {
         int numero = configuracion.getParticipantes();
         if (juegoEspera.lleno(numero)) {
-            Sistema.getInstancia().avisar(Sistema.Eventos.juegoNuevo);
+            empezarJuego();
             return true;
-        }
+        }       
         return false;
     }
 
@@ -55,6 +56,7 @@ public class SistemaJuegos {
         juegos.add(porComenzar);
         nuevoJuegoEspera();
         porComenzar.crearRonda();
+        Sistema.getInstancia().avisar(Sistema.Eventos.juegoNuevo);
     }
     
     public int participantesFaltantes(){
@@ -67,7 +69,7 @@ public class SistemaJuegos {
     
     public void salirListaEspera(Participante p){
         juegoEspera.getParticipantes().remove(p);
-        //Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
+        Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
     } 
     
     public ArrayList<Juego> juegosEnProgreso(){

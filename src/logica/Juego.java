@@ -23,14 +23,18 @@ public class Juego extends Observable {
     private Ronda rondaActual;
     private Date fecha;
 
-    
+    public Participante apostador() {
+        
+        return this.getRondaActual().agarrarPrimero();    
+    }
+
     public enum Eventos {
         rondaNueva, apuestaNueva, ganadorJuego, continuar, ganadorRonda, retiroJugador
     };
 
     public Juego() {
     }
-    
+
     public Ronda getRondaActual() {
         return rondaActual;
     }
@@ -38,9 +42,10 @@ public class Juego extends Observable {
     public Participante getGanador() {
         return ganador;
     }
-    
+
     public void agregar(Participante p) {
         participantes.add(p);
+
     }
 
     public void crearRonda() {
@@ -136,34 +141,33 @@ public class Juego extends Observable {
     public boolean seEncuentra(Participante participante) {
         return participantes.contains(participante);
     }
-    
-    private int totalApostado(){
+
+    private int totalApostado() {
         int ret = 0;
-        for(Participante p : participantesHistoria()){
+        for (Participante p : participantesHistoria()) {
             ret += p.getTotalApostado();
         }
         return ret;
     }
-    
+
     public ArrayList<Participante> participantesHistoria() {
         ArrayList<Participante> ret = new ArrayList();
-        for(Participante p1 : participantes){
+        for (Participante p1 : participantes) {
             ret.add(p1);
         }
-        for(Participante p2 : retirados){
+        for (Participante p2 : retirados) {
             ret.add(p2);
         }
         return ret;
     }
 
+    public boolean tiene(Participante participante) {
+        return this.getRondaActual().getPasadores().contains(participante);
+    }
 
     @Override
     public String toString() {
         return "Fecha inicio: " + fecha + " Participantes: " + (participantes.size() + retirados.size()) + " Rondas jugadas: " + rondas + " Total apostado: " + totalApostado();
     }
-    
-    
-    
-    
 
 }

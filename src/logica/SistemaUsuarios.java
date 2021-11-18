@@ -26,23 +26,30 @@ public class SistemaUsuarios {
 
     }
 
-    public Jugador loginJugador(String n, String c) {
+    public Jugador loginJugador(String n, String c) throws PokerException {
         Jugador j = (Jugador) login(n, c, jugadores);
         return j;
     }
 
-    public Administrador loginAdmin(String n, String c) {
+    public Administrador loginAdmin(String n, String c) throws PokerException {
         Administrador adm = (Administrador) login(n, c, administradores);
         return adm;
     }
 
-    private Usuario login(String nom, String pwd, ArrayList usuarios) {
+    private Usuario login(String nom, String pwd, ArrayList usuarios) throws PokerException {
         Usuario u;
+        boolean encontre = false;
         for (Object obj : usuarios) {
             u = (Usuario) obj;
-            if (u.getNombreUsuario().equals(nom) && u.getContrasenha().equals(pwd)) {
-                return u;
+            if (u.getNombreUsuario().equals(nom)) {
+                encontre = true;
+                if (u.getContrasenha().equals(pwd)) {
+                    return u;
+                }
             }
+        }
+        if (!encontre) {
+            throw new PokerException("El nombre ingresado no es correcto");
         }
         return null;
     }

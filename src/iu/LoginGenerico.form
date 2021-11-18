@@ -43,16 +43,16 @@
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jNombre" max="32767" attributes="0"/>
-                          <Component id="jContrasena" pref="121" max="32767" attributes="0"/>
+                          <Component id="jNombre" pref="174" max="32767" attributes="0"/>
+                          <Component id="jContrasena" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
-                      <Component id="jMensaje" min="-2" pref="181" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="jMensaje" min="-2" pref="339" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="116" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,6 +105,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jMensaje">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -146,6 +146,7 @@ public class Ronda {
     public void cobrarMontoLuzApuesta(Participante p, int monto) {
         p.getJugador().pagar(monto);
         p.sumarApostado(monto);
+        p.sumarGanado(-monto);   //restar la plata apostada al monto total ganado
         pozo.agregar(monto);
     }
 
@@ -176,6 +177,10 @@ public class Ronda {
             }
         }
         pozo.premiar(ganador);
+    }
+
+    Participante agarrarPrimero() {
+        return participantes.get(0);
     }
 
 }

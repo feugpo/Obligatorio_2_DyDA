@@ -27,9 +27,9 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     public PartidaPoker(java.awt.Frame parent, boolean modal, Juego juego, Participante participante) {
         super(parent, modal);
         initComponents();
-        this.ctrlPoker = new ControladorPartidaPoker(this, juego, participante);
         inhabilitarBotones();
-
+        this.ctrlPoker = new ControladorPartidaPoker(this, juego, participante);
+        
     }
 
     /**
@@ -65,7 +65,6 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         });
 
         jMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jMensaje.setText("ESPERANDO PARA EMPEZAR");
 
         jCarta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,11 +97,6 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
             }
         });
 
-        listaJugadores.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listaJugadores);
 
         jLabel1.setText("Tu Saldo:");
@@ -195,9 +189,7 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     private void jBtnApostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnApostarActionPerformed
         String respuesta = JOptionPane.showInputDialog(this, "Cuanto apuesta?", "Ingresar apuesta", -1);
         if(respuesta!=null){
-            int iRes = Integer.parseInt(respuesta);
-            System.out.println(respuesta);
-            ctrlPoker.apostar(iRes);
+            ctrlPoker.apostar(respuesta);
         }
         
     }//GEN-LAST:event_jBtnApostarActionPerformed
@@ -207,7 +199,7 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }//GEN-LAST:event_jCarta1PropertyChange
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
+
         ctrlPoker.salirJuego();
     }//GEN-LAST:event_formWindowClosing
 
@@ -361,7 +353,7 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }
 
     @Override
-    public void mostrarJugadores(ArrayList<Participante> participantes) {
+    public void mostrarJugadores(ArrayList<String> participantes) {
         listaJugadores.setListData(participantes.toArray());
     }
 

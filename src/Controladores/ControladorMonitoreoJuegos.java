@@ -38,17 +38,17 @@ public class ControladorMonitoreoJuegos implements Observador{
         }
         if(evento.equals(Juego.Eventos.ganadorRonda) || evento.equals(Juego.Eventos.rondaNueva)){
             mostrarJuegos();
-            seleccionJuego((Juego)origen);
+            
         }
         if(evento.equals(Juego.Eventos.ganadorJuego)){
             origen.quitar(this);
             mostrarJuegos();
-            
         }
     }
     
     private void mostrarJuegos() {
         ArrayList<Juego> juegos = fachada.juegosEnProgreso();
+        //AGREGANDO EL OBSERVADOR A LOS JUEGOS ACTIVOS;
         for(Juego j : juegos){
             j.agregar(this);
         }
@@ -58,7 +58,9 @@ public class ControladorMonitoreoJuegos implements Observador{
     public void seleccionJuego(Juego juego) {
         if(juego!=null){
             vista.mostrarJugadores(juego.participantesHistoria());
-        }
+        }else{
+            vista.mostrarJugadores(new ArrayList());
+        };
     }
     
     
