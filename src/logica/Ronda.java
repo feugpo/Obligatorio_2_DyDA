@@ -12,43 +12,55 @@ import java.util.ArrayList;
  *
  * @author Fernando
  */
-public class Ronda extends Observable {
+public class Ronda {
 
     private ArrayList<Participante> participantes = new ArrayList();
     private ArrayList<Participante> pasadores = new ArrayList();
     private int apuesta;
-    //private Participante ganador;
+    private Participante ganador;
     private Mazo mazo;
     private Pozo pozo;
 
-    //LLEVAR EVENTOS AL JUEGO 
-//    public enum Eventos {
-//        apuestaNueva, hayGanador
-//    };
     public Ronda(ArrayList<Participante> p) {
         this.mazo = new Mazo();
         this.pozo = new Pozo();
-        participantes = p;
+        for (Participante par : p) {
+            participantes.add(par);
+        }
         //para mi ronda nueva preciso cobrar la luz, barajar, repartir, y ya saber que mano tengo para mostrar los datos
         cobrarLuz();
         repartir(); //esto es correcto?
         evaluarManos();
     }
 
+    public int getApuesta() {
+        return apuesta;
+    }
+    
+    
+
+    public Participante getGanador() {
+        return ganador;
+    }
+
     public Pozo getPozo() {
         return pozo;
     }
 
-    
-    
     public ArrayList<Participante> getPasadores() {
         return pasadores;
+    }
+
+    public ArrayList<Participante> getParticipantes() {
+        return participantes;
     }
 
     public Ronda(ArrayList<Participante> pptes, Pozo pozo) {
         this.mazo = new Mazo();
         this.pozo = pozo;
-        this.participantes = pptes;
+        for (Participante par : pptes) {
+            participantes.add(par);
+        }
         cobrarLuz();
         repartir(); //esto es correcto?
         evaluarManos();
@@ -96,37 +108,39 @@ public class Ronda extends Observable {
         return pasaronTodos();
     }
 
-    //ESTA ES PARA CUANDO LA PERSONA SE VA CERRANDO EL JUEGO // O SE VA DE LA RONDA POR AHORA
-    public void retirarse(Participante p) {
+    private boolean pasaronTodos() {
+        return participantes.isEmpty();
+    }
+
+    public boolean retirarse(Participante p) {
         participantes.remove(p);
         pasadores.remove(p);
         p.vaciarMano();
+        return hayGanadorRondaPorDefecto();
     }
 
-    //PENSAR COMO UNO LARGA EVENTO Y EL OTRO NO (LUZ VS APUESTA)
-    //metodo apostar con el evento del observer 
     public void apostar(Participante p, int monto) {
         cobrarMontoLuzApuesta(p, monto);
         this.apuesta = monto;
         //pasamos todos menos el apostador a la lista de pasadores
         ArrayList<Participante> aux = new ArrayList();
         for (Participante parti : participantes) {
-
             if (parti != p) {
                 aux.add(parti);
             }
         }
+        //usando una lista auxiliar
         for (Participante parti1 : aux) {
             pasar(parti1);
         }
-        //avisar(Eventos.apuestaNueva);
     }
 
     //AGREGAR LOGICA SI PASADORES == VACIO AL FINAL => SELECCIONAR UN GANADOR????
-    public void aceptarApuesta(Participante p) {
+    public boolean aceptarApuesta(Participante p) {
         cobrarMontoLuzApuesta(p, apuesta);
         pasadores.remove(p);
         participantes.add(p);
+        return pasadores.isEmpty();
     }
 
     public void cobrarMontoLuzApuesta(Participante p, int monto) {
@@ -135,8 +149,33 @@ public class Ronda extends Observable {
         pozo.agregar(monto);
     }
 
-    private boolean pasaronTodos() {
-        return participantes.size() == 0;
+    public boolean seEncuentra(Participante participante) {
+        return participantes.contains(participante) || pasadores.contains(participante);
+    }
+
+    public boolean hayGanadorRondaPorDefecto() {
+        boolean ret = participantes.size() + pasadores.size() == 1;
+        if (ret) {
+            if (participantes.isEmpty()) {
+                ganador = pasadores.get(0);
+            } else {
+                ganador = participantes.get(0);
+            }
+            pozo.premiar(ganador);
+        }
+        return ret;
+    }
+
+    public void seleccionarGanadorRonda() {
+        ganador = participantes.get(0);
+        for (int x = 1; x < participantes.size(); x++) {
+            if (participantes.get(x).getMano().compareTo(ganador.getMano()) > 0) {
+                ganador = participantes.get(x);
+            } else if (participantes.get(x).getMano().compareTo(ganador.getMano()) == 0) {
+                ganador = ganador.getMano().getFigura().desempatar(ganador, participantes.get(x));
+            }
+        }
+        pozo.premiar(ganador);
     }
 
 }

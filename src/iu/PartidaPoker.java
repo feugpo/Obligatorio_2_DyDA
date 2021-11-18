@@ -27,8 +27,8 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     public PartidaPoker(java.awt.Frame parent, boolean modal, Juego juego, Participante participante) {
         super(parent, modal);
         initComponents();
-        inhabilitarBotones();
         this.ctrlPoker = new ControladorPartidaPoker(this, juego, participante);
+        inhabilitarBotones();
 
     }
 
@@ -49,6 +49,13 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         jCarta5 = new javax.swing.JButton();
         jBtnApostar = new javax.swing.JButton();
         jBtnPasar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaJugadores = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jSaldo = new javax.swing.JLabel();
+        jPozo = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -91,19 +98,32 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
             }
         });
 
+        listaJugadores.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listaJugadores);
+
+        jLabel1.setText("Tu Saldo:");
+
+        jLabel2.setText("Pozo Acumulado:");
+
+        jLabel3.setText("Participantes del Juego:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
+                        .addGap(159, 159, 159)
                         .addComponent(jBtnApostar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(110, 110, 110)
                         .addComponent(jBtnPasar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
@@ -115,26 +135,50 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
                                 .addGap(18, 18, 18)
                                 .addComponent(jCarta4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCarta5, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(117, Short.MAX_VALUE))
+                                .addComponent(jCarta5, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jSaldo))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPozo))
+                            .addComponent(jLabel3))))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCarta1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCarta2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCarta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCarta4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCarta5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jCarta1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCarta2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCarta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCarta4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCarta5))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jSaldo))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jPozo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnApostar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnPasar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+                .addGap(57, 57, 57))
         );
 
         pack();
@@ -163,7 +207,8 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }//GEN-LAST:event_jCarta1PropertyChange
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        ctrlPoker.salir();
+        
+        ctrlPoker.salirJuego();
     }//GEN-LAST:event_formWindowClosing
 
     private void jBtnPasarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPasarActionPerformed
@@ -182,7 +227,14 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     private javax.swing.JButton jCarta3;
     private javax.swing.JButton jCarta4;
     private javax.swing.JButton jCarta5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jMensaje;
+    private javax.swing.JLabel jPozo;
+    private javax.swing.JLabel jSaldo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listaJugadores;
     // End of variables declaration//GEN-END:variables
 
     private JButton[] crearArrayBotones() {
@@ -200,8 +252,10 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }
 
     @Override
-    public void alertarApuesta() {
-        int respuesta = JOptionPane.showOptionDialog(this, "Aceptas o rechazas?", "Aceptar Apuesta", -1, JOptionPane.OK_CANCEL_OPTION, null, new String[]{"Acepto", "Rechazo"}, "default");
+    public void alertarApuesta(String apostador, int monto) {
+        inhabilitarBotones();
+        String mensaje = apostador + "ha apostado " + monto + " ¿quieres igualar?";
+        int respuesta = JOptionPane.showOptionDialog(this, mensaje, "Nueva Apuesta", -1, JOptionPane.OK_CANCEL_OPTION, null, new String[]{"Aceptar", "Retirarse"}, "default");
         if (respuesta == 0) {
             //acepta
             ctrlPoker.aceptarApuesta();
@@ -212,8 +266,9 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
     }
 
     @Override
-    public void mostrarTitulo(String nombreCompleto) {
-        this.setTitle(nombreCompleto);
+    public void mostrarDatos(String titulo, int saldo) {
+        this.setTitle(titulo);
+        jSaldo.setText(Integer.toString(saldo));
     }
 
     @Override
@@ -273,4 +328,54 @@ public class PartidaPoker extends javax.swing.JDialog implements VistaPartidaPok
         jMensaje.setText("");
     }
 
+    @Override
+    public void consultarSiContinua() {
+        int respuesta = JOptionPane.showOptionDialog(this, "¿Deseas unirte a la siguiente ronda?", "¿Continuar Jugando?", -1, JOptionPane.YES_NO_OPTION, null, new String[]{"Continuar", "Retirarse"}, "default");
+        if (respuesta == 0) {
+            //acepta
+            ctrlPoker.continuar();
+        } else {
+            //rechaza
+            ctrlPoker.salirRonda();
+            ctrlPoker.salirJuego();
+        }
+    }
+
+    @Override
+    public void avisarNoContinua() {
+        //JOptionPane.showMessageDialog(this,"No tienes fondos para continuar");
+        JOptionPane.showMessageDialog(this, "No tienes fondos para continuar", "", -1, null);
+        ctrlPoker.salirJuego();
+    }
+    
+    @Override
+    public void cerrarVista() {
+        this.dispose();
+    }
+
+ 
+    @Override
+    public void informarSobreGanadorRonda(String nombreUsu, String figura) {
+        String mensaje = "El ganador/a es " + nombreUsu + " con " + figura + "!"; 
+        JOptionPane.showMessageDialog(this, mensaje, "", -1, null);
+    }
+
+    @Override
+    public void mostrarJugadores(ArrayList<Participante> participantes) {
+        listaJugadores.setListData(participantes.toArray());
+    }
+
+    @Override
+    public void mostrarPozo(int monto) {
+        jPozo.setText(Integer.toString(monto));
+    }
+
+    @Override
+    public void avisarGanadorJuego(String nombreUsu) {
+        String mensaje = "Felicitaciones " + nombreUsu + "eres el ganador!!!";
+        JOptionPane.showMessageDialog(this, mensaje, "", -1, null);
+        //ctrlPoker.salirJuego();
+    }
+
+  
 }

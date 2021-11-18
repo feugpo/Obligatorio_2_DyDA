@@ -60,6 +60,13 @@ public abstract class Usuario {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return nombreUsuario;
+    }
+    
+    
+    
     
     
     

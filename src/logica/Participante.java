@@ -75,9 +75,23 @@ public class Participante {
         return getMano() != null;
     }
 
-    void vaciarMano() {
+    public void vaciarMano() {
         this.mano = null;
     }
+
+    public void cobrar(int monto) {
+        jugador.cobrar(monto);
+    }
+    
+    public String nombreUsu(){
+        return this.jugador.getNombreUsuario();
+    }
+
+    @Override
+    public String toString() {
+        return jugador.toString();
+    }
+    
     
     
 }

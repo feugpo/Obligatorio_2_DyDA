@@ -36,12 +36,12 @@ public class SistemaJuegos {
         Participante p = new Participante(j);
         juegoEspera.agregar(p);
         //agregar un evento para se agrego una persona a lista espera
-        //Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
+        Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
         return juegoEspera;
     }
 
     public boolean listaEsperaLLena() {
-        int numero = configuracion.getParticipantes(); 
+        int numero = configuracion.getParticipantes();
         if (juegoEspera.lleno(numero)) {
             Sistema.getInstancia().avisar(Sistema.Eventos.juegoNuevo);
             return true;
@@ -60,4 +60,13 @@ public class SistemaJuegos {
     public int participantesFaltantes(){
         return configuracion.getParticipantes() - juegoEspera.getParticipantes().size();
     }
+    
+    public boolean saldoSuficiente(int saldo) {
+        return saldo > configuracion.getLuz();
+    }
+    
+    public void salirListaEspera(Participante p){
+        juegoEspera.getParticipantes().remove(p);
+        Sistema.getInstancia().avisar(Sistema.Eventos.modificoListaEspera);
+    } 
 }

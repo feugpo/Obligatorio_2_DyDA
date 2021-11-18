@@ -25,7 +25,7 @@ public class Par extends Figura {
             ArrayList<Carta> aux = new ArrayList();
             Carta c1 = m.get(x);
             aux.add(c1);
-            int y = x+1;
+            int y = x + 1;
             while (y < 5) {
                 Carta c2 = m.get(y);
                 if (c1.getValor().compareTo(c2.getValor()) == 0) {
@@ -41,12 +41,16 @@ public class Par extends Figura {
                     //Si la carta del par encontrado es mayor a la del guardado => lo sustituyo
                     if (comp > 0) {
                         mano.setFigura(this);
-                        mano.setFiguraCartas(aux);
+                        for (Carta carta : aux) {
+                            mano.agregarAFiguraCartas(carta);
+                        }
                     }
                 } else if (mano.getFigura() == null) {
                     //si no hay figura => uso la q encontre
                     mano.setFigura(this);
-                    mano.setFiguraCartas(aux);
+                    for (Carta carta : aux) {
+                        mano.agregarAFiguraCartas(carta);
+                    }
                 }
                 //si hay una figura y es mayor => no asigna nada
             }

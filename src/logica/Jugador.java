@@ -10,6 +10,7 @@ package logica;
  * @author Fernando
  */
 public class Jugador extends Usuario {
+
     private int saldo;
 
     public Jugador(String nombreUsuario, String contrasenha, String nombreCompleto, int saldo) {
@@ -21,18 +22,20 @@ public class Jugador extends Usuario {
         return saldo;
     }
 
-    void cobrar(int monto) {
+    public void cobrar(int monto) {
         saldo += monto;
     }
 
-    void pagar(int monto) {
+    public void pagar(int monto) {
         saldo -= monto;
     }
 
-   
+    
 
     
-     
-  
+
+    
+    
+    
     
 }

@@ -28,24 +28,19 @@ public class SistemaUsuarios {
 
     public Jugador loginJugador(String n, String c) {
         Jugador j = (Jugador) login(n, c, jugadores);
-        
-        
-           return j; 
+        return j;
     }
-    
+
     public Administrador loginAdmin(String n, String c) {
         Administrador adm = (Administrador) login(n, c, administradores);
         return adm;
     }
-    
-    
-    
-   
-    private Usuario login(String nom,String pwd,ArrayList usuarios){
+
+    private Usuario login(String nom, String pwd, ArrayList usuarios) {
         Usuario u;
-        for(Object obj:usuarios){
+        for (Object obj : usuarios) {
             u = (Usuario) obj;
-            if(u.getNombreUsuario().equals(nom) && u.getContrasenha().equals(pwd)){
+            if (u.getNombreUsuario().equals(nom) && u.getContrasenha().equals(pwd)) {
                 return u;
             }
         }

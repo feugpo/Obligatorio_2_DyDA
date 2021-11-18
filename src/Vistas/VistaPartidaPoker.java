@@ -15,13 +15,12 @@ import logica.Participante;
  * @author Gabriel
  */
 public interface VistaPartidaPoker {
-    
-    
+
     public void cargarVistaParticipante(Participante p);
 
-    public void alertarApuesta();
+    public void alertarApuesta(String apostardor, int monto);
 
-    public void mostrarTitulo(String nombreCompleto);
+    public void mostrarDatos(String titulo, int saldo);
 
     public void mostrarCartas(ArrayList<String> cartas);
 
@@ -30,9 +29,25 @@ public interface VistaPartidaPoker {
     public void mensajeMano(String nomFigura, String cartaAlta);
 
     public void habilitarBotones();
-    
+
     public void inhabilitarBotones();
 
     public void vaciarMensaje();
-   
+
+    public void consultarSiContinua();
+
+    public void avisarNoContinua();
+    
+    public void cerrarVista();
+
+    public void informarSobreGanadorRonda(String nombreUsu, String figura);
+
+    public void mostrarJugadores(ArrayList<Participante> participantes);
+
+    public void mostrarPozo(int monto);
+
+    public void avisarGanadorJuego(String nombreUsu);
+
+    
+
 }

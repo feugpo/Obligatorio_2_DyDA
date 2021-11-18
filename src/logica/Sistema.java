@@ -18,8 +18,6 @@ public class Sistema extends Observable {
     private SistemaJuegos sJuegos = new SistemaJuegos();
     private static Sistema instancia = new Sistema();
 
-   
-
     public enum Eventos {
         juegoNuevo,
         modificoListaEspera
@@ -71,6 +69,15 @@ public class Sistema extends Observable {
     public int participantesFaltantes() {
         return sJuegos.participantesFaltantes();
     }
+
+    public boolean saldoSuficiente(int saldo) {
+        return sJuegos.saldoSuficiente(saldo);
+    }
+
+    public void salirListaEspera(Participante p) {
+        sJuegos.salirListaEspera(p);
+    }
+    
     
     
 

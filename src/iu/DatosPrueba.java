@@ -23,8 +23,8 @@ public class DatosPrueba {
         Sistema sistema = Sistema.getInstancia();
         
         //JUGADORES
-        sistema.agregarJugador("Maria", "123", "Maria Gomez", 500);
-        sistema.agregarJugador("Juan", "123", "Juan Cruz", 1500);
+        sistema.agregarJugador("Maria", "123", "Maria Gomez", 120);
+        sistema.agregarJugador("Juan", "123", "Juan Cruz", 80);
         sistema.agregarJugador("Nicolas", "123", "Nicolas Barreiro", 80);
         sistema.agregarJugador("Ana", "123", "Ana Maria",60);
         sistema.agregarJugador("Pedro", "123", "Pedro FlintStone", 120);
@@ -35,7 +35,7 @@ public class DatosPrueba {
         //luz
         int luz = 5;
         //numero participantes por juego
-        int participantes = 2;
+        int participantes = 3;
         //figuras posibles
         ArrayList<Figura> figuras = new ArrayList();
         Par par = new Par("par", 1);

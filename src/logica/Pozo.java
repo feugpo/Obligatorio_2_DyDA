@@ -14,8 +14,21 @@ public class Pozo {
 
     public Pozo() {
     }
+
+    public int getMonto() {
+        return monto;
+    }
+    
+    
     
     void agregar(int apuesta) {
         monto += apuesta;
     }
+
+    void premiar(Participante ganador) {
+        ganador.sumarGanado(monto);
+        ganador.cobrar(monto); 
+    }
+
 }
+

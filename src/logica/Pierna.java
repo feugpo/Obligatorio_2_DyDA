@@ -24,7 +24,7 @@ public class Pierna extends Figura {
         for (int x = 0; x < 3; x++) {
             ArrayList<Carta> aux = new ArrayList();
             aux.add(m.get(x));
-            int y = x+1;
+            int y = x + 1;
             while (y < 5) {
                 if (m.get(x).getValor() == m.get(y).getValor()) {
                     aux.add(m.get(y));
@@ -36,11 +36,15 @@ public class Pierna extends Figura {
                 //Si hay una figura existente y la pierna es mayor (ej. par)
                 if (mano.getFigura() != null && this.compareTo(mano.getFigura()) > 0) {
                     mano.setFigura(this);
-                    mano.setFiguraCartas(aux);
-                } else if(mano.getFigura() == null){
+                    for (Carta carta : aux) {
+                        mano.agregarAFiguraCartas(carta);
+                    }
+                } else if (mano.getFigura() == null) {
                     //si no hay figura => uso la q encontre
                     mano.setFigura(this);
-                    mano.setFiguraCartas(aux);
+                    for (Carta carta : aux) {
+                        mano.agregarAFiguraCartas(carta);
+                    }
                 }
                 //si hay una figura y es mayor => no asigna nada
             }
@@ -49,7 +53,7 @@ public class Pierna extends Figura {
 
     @Override
     public Participante desempatar(Participante p1, Participante p2) {
-        if(p1.getMano().valorCartaFigura().compareTo(p2.getMano().valorCartaFigura()) > 0){
+        if (p1.getMano().valorCartaFigura().compareTo(p2.getMano().valorCartaFigura()) > 0) {
             return p1;
         }
         return p2;
